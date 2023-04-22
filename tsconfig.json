@@ -14,7 +14,17 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "paths": {}
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@components": ["src/components"],
+      "@ui/*": ["src/ui/*"],
+      "@ui": ["src/ui"],
+      "@public/*": ["public/*"],
+      "@public": ["public"],
+      "@styles/*": ["src/styles/*"],
+      "@styles": ["src/styles"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

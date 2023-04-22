@@ -1,0 +1,1 @@
+export { SearchWrapper } from "./search";
