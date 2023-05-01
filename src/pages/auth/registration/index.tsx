@@ -12,12 +12,11 @@ const Registration = () => {
         `https://134b-62-84-32-239.ngrok-free.app/verification/verify?code=${code}`
       );
       if (res.status === 200) {
-        setVerificationResponse("Верификация прошла");
+        setVerificationResponse("Ваш аккаунт верифицирован");
         setVerificationCode(200);
       }
-    } catch (err) {
-      console.log(err);
-      setVerificationResponse("Не получилось верифицировать");
+    } catch (err: any) {
+      setVerificationResponse(err.response.data.message);
       setVerificationCode(400);
     }
   };
