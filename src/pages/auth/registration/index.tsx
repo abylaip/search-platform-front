@@ -5,30 +5,33 @@ import axios from "axios";
 const Registration = () => {
   const router = useRouter();
   const [verificationResponse, setVerificationResponse] = useState("");
-  const [verificationCode, setVerificationCode] = useState(0);
+  const [verificationCode, setVerificationCode] = useState(false);
+
   const sendVerification = async (code: string | string[]) => {
     try {
       const res = await axios.get(
         `https://134b-62-84-32-239.ngrok-free.app/verification/verify?code=${code}`
       );
-      if (res.status === 200) {
+      if (res.status === 202) {
         setVerificationResponse("Ваш аккаунт верифицирован");
-        setVerificationCode(200);
+        setVerificationCode(true);
       }
     } catch (err: any) {
       setVerificationResponse(err.response.data.message);
-      setVerificationCode(400);
+      setVerificationCode(false);
     }
   };
+
   useLayoutEffect(() => {
     if (router.query.code !== undefined) {
       sendVerification(router.query.code);
     }
   }, [router.query.code]);
+
   return (
     <div className="w-full h-screen flex justify-center pt-20 bg-slate-100">
-      <div className="border-4 bg-white w-96 text-center p-6 rounded-lg h-max flex flex-row space-x-4">
-        {verificationCode === 200 ? (
+      <div className="border-4 bg-white w-96 text-center p-6 rounded-lg h-max flex flex-row space-x-4 justify-center">
+        {verificationCode ? (
           <div className="text-green-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,9 +67,7 @@ const Registration = () => {
           </div>
         )}
         <p
-          className={`${
-            verificationCode === 200 ? "text-green-500" : "text-red-500"
-          }`}
+          className={`${verificationCode ? "text-green-500" : "text-red-500"}`}
         >
           {verificationResponse}
         </p>
