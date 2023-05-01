@@ -4,12 +4,11 @@ import axios from "axios";
 
 const Registration = () => {
   const router = useRouter();
-  const [verificationCode, setVerificationCode] = useState<any>();
   const [verificationResponse, setVerificationResponse] = useState("");
-  const sendVerification = async () => {
-    console.log("sendVer: ", router.query.code);
+  const sendVerification = async (code: string | string[]) => {
+    console.log("sendVer: ", code);
     const res = await axios.get(
-      `https://134b-62-84-32-239.ngrok-free.app/verification/verify?code=${verificationCode}`
+      `https://134b-62-84-32-239.ngrok-free.app/verification/verify?code=${code}`
     );
     if (res.status === 200) {
       setVerificationResponse("Верификация прошла");
@@ -18,8 +17,9 @@ const Registration = () => {
     }
   };
   useLayoutEffect(() => {
-    setVerificationCode(router.query.code);
-    sendVerification();
+    if (router.query.code !== undefined) {
+      sendVerification(router.query.code);
+    }
   }, [router.query.code]);
   return (
     <div>
