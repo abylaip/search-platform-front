@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -7,6 +7,7 @@ import Image from "next/image";
 export const Header = () => {
   const router = useRouter();
   const [isAuth, setIsAuth] = useState(true);
+
   const menu = [
     {
       name: "Home",
@@ -25,6 +26,7 @@ export const Header = () => {
       to: "/notifications",
     },
   ];
+
   return (
     <header className="sticky top-0 z-10 py-5 bg-white shadow-lg">
       <Head>
