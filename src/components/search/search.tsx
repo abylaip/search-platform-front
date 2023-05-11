@@ -1,7 +1,9 @@
 import { ReactNode, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+import { useRouter } from 'next/router'
 
 export const SearchWrapper = ({ children }: { children: ReactNode }) => {
+  const router = useRouter()
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
