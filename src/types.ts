@@ -1,6 +1,14 @@
 export interface IUser {
-  name: string;
-  surname: string;
+  id?: string;
+  email: string;
+  userType?: null;
+  phoneNumber?: string;
+  surname?: string;
+  patronymic?: string;
+  birthDate?: string;
+  status: string;
+  profile?: null;
+  thesisStatus: string;
 }
 
 export interface IDiploma {
