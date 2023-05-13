@@ -1,11 +1,14 @@
 import { ReactNode, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export const SearchWrapper = ({ children }: { children: ReactNode }) => {
-  const router = useRouter()
+  const router = useRouter();
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [showSearchButton, setShowSearchButton] = useState(false);
+
+  const exceptPaths = ["/auth/registration", "/login", "/auth_code"];
 
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
@@ -16,29 +19,37 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
+  useEffect(() => {
+    exceptPaths.includes(router.pathname)
+      ? setShowSearchButton(false)
+      : setShowSearchButton(true);
+  }, [router]);
+
   return (
     <div className="relative">
-      <div
-        className={`bg-accent hover:bg-opacity-100 bg-opacity-75 cursor-pointer h-16 w-16 p-3 text-white flex items-center justify-center rounded-full absolute right-32 top-28 ${
-          showSearchInput ? "hidden" : "block"
-        }`}
-        onClick={() => setShowSearchInput(true)}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-8 h-8"
+      {showSearchButton && (
+        <div
+          className={`bg-accent hover:bg-opacity-100 bg-opacity-75 cursor-pointer h-16 w-16 p-3 text-white flex items-center justify-center rounded-full absolute right-32 top-28 ${
+            showSearchInput ? "hidden" : "block"
+          }`}
+          onClick={() => setShowSearchInput(true)}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          />
-        </svg>
-      </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-8 h-8"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </svg>
+        </div>
+      )}
       {showSearchInput && (
         <TransitionSearchBar className="bg-accent bg-opacity-50">
           <div className="flex mt-24 justify-center">
