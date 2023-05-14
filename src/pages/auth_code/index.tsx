@@ -5,7 +5,7 @@ import axios from "axios";
 const AuthCode = () => {
   const router = useRouter();
   const getAuthTokens = async () => {
-    const params = new URLSearchParams();
+    const params = new FormData();
     params.append("grant_type", "authorization_code");
     params.append("code", String(router.query.code));
     params.append(
