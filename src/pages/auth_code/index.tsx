@@ -8,10 +8,7 @@ const AuthCode = () => {
     const params = new FormData();
     params.append("grant_type", "authorization_code");
     params.append("code", String(router.query.code));
-    params.append(
-      "redirect_uri",
-      "https://search-platform-front.vercel.app/auth_code"
-    );
+    params.append("redirect_uri", `${window.location.origin}/auth_code`);
     params.append("client_id", "search-platform-client");
     params.append(
       "code_verifier",
