@@ -6,16 +6,16 @@ const AuthCode = () => {
   const router = useRouter();
   const getAuthTokens = async () => {
     const params = new FormData();
-    params.append("grant_type", "authorization_code");
-    params.append("code", String(router.query.code));
+    params.append("grant_type", "client_credentials");
+    // params.append("code", String(router.query.code));
     params.append("redirect_uri", `${window.location.origin}/auth_code`);
-    params.append("client_id", "search-platform-client");
-    params.append(
-      "code_verifier",
-      "1bfbb79d1b447eb2fc923f41daacc293dd8a1123ae36520f7e36ec56"
-    );
-    params.append("scope", "openid");
-    params.append("response_type", "code");
+    // params.append("client_id", "search-platform-client");
+    // params.append(
+    //   "code_verifier",
+    //   "1bfbb79d1b447eb2fc923f41daacc293dd8a1123ae36520f7e36ec56"
+    // );
+    // params.append("scope", "openid");
+    // params.append("response_type", "code");
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
