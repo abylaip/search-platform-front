@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const Header = () => {
   const router = useRouter();
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
   const menu = [
     {
@@ -46,16 +46,18 @@ export const Header = () => {
             <Link href="/diplomas">Дипломные работы</Link>
           </p>
           {isAuth ? (
-            <div className="flex flex-row items-center justify-center space-x-2 cursor-pointer">
-              <Image
-                src="/static/placeholder.png"
-                width={40}
-                height={40}
-                className="rounded-full w-10 h-10 object-cover"
-                alt="avatar"
-              />
-              <p>Abylay Aiyp</p>
-            </div>
+            <Link href="/profile">
+              <div className="flex flex-row items-center justify-center space-x-2 cursor-pointer">
+                <Image
+                  src="/static/placeholder.png"
+                  width={40}
+                  height={40}
+                  className="rounded-full w-10 h-10 object-cover"
+                  alt="avatar"
+                />
+                <p>Abylay Aiyp</p>
+              </div>
+            </Link>
           ) : (
             <div className="flex space-x-2">
               <Link
@@ -64,7 +66,7 @@ export const Header = () => {
                   router.pathname === "/login" ? "font-semibold" : ""
                 }`}
               >
-                Регистрация
+                Войти
               </Link>
             </div>
           )}

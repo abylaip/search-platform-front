@@ -10,7 +10,7 @@ const Registration = () => {
   const sendVerification = async (code: string | string[]) => {
     try {
       const res = await axios.get(
-        `https://134b-62-84-32-239.ngrok-free.app/verification/verify?code=${code}`
+        `${process.env.NEXT_PUBLIC_API_URL}/verification/verify?code=${code}`
       );
       if (res.status === 202) {
         setVerificationResponse("Ваш аккаунт верифицирован");
