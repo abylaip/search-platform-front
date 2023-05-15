@@ -11,7 +11,7 @@ const Login = () => {
     const responseType = "code";
     const scope = "openid";
     const redirectUri = "https://search-platform-front.vercel.app/auth_code";
-    const codeChallenge = "Ak_guIA-N5j1wtr-Pm8XpDQcCTCabjylZVWsdXiLq-w";
+    const codeChallenge = "4tgl2ggNilZyGn-lwnNCUOC1zCqkY9Z5-FnZ0gXUdeA";
     const codeChallengeMethod = "S256";
 
     const loginUrl = `${authorizationEndpoint}?response_type=${responseType}&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}&code_challenge=${codeChallenge}&code_challenge_method=${codeChallengeMethod}`;

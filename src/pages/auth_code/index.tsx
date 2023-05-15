@@ -11,7 +11,7 @@ const AuthCode = () => {
     // params.append("client_id", "search-platform-client");
     params.append(
       "code_verifier",
-      "1bfbb79d1b447eb2fc923f41daacc293dd8a1123ae36520f7e36ec56"
+      "Gk7tJtkC.W3YGKC0wQc.VALTtAcKesea2DAoa73fKbvNS.7AmJ1rbEo1Q9w9bCx43HFQCRy7tugZM8Y9IWKgbwIs3WRZ3pAsDh.8Wfar3MK-ah~EriVHPB8Vttentctm"
     );
     // params.append("scope", "openid");
     // params.append("response_type", "code");
