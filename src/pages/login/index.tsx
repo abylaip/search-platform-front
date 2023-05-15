@@ -2,8 +2,7 @@ import { useLayoutEffect } from "react";
 
 const Login = () => {
   const redirectToLogin = async () => {
-    const authorizationEndpoint =
-      "https://0cc5-178-90-95-197.ngrok-free.app/oauth2/authorize";
+    const authorizationEndpoint = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize`;
     const clientId = "search-platform-client";
     const responseType = "code";
     const scope = "openid";
