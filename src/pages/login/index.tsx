@@ -5,21 +5,21 @@ import { useRouter } from "next/router";
 const Login = () => {
   const router = useRouter();
   const redirectToLogin = async () => {
+    const authorizationEndpoint =
+      "https://0cc5-178-90-95-197.ngrok-free.app/oauth2/authorize";
+    const clientId = "search-platform-client";
+    const responseType = "code";
+    const scope = "openid";
+    const redirectUri = "https://search-platform-front.vercel.app/auth_code";
+    const codeChallenge = "Ak_guIA-N5j1wtr-Pm8XpDQcCTCabjylZVWsdXiLq-w";
+    const codeChallengeMethod = "S256";
+
+    const loginUrl = `${authorizationEndpoint}?response_type=${responseType}&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}&code_challenge=${codeChallenge}&code_challenge_method=${codeChallengeMethod}`;
+
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize?response_type=code&client_id=search-platform-client&scope=openid&redirect_uri=https://search-platform-front.vercel.app/auth_code&code_challenge=Ak_guIA-N5j1wtr-Pm8XpDQcCTCabjylZVWsdXiLq-w&code_challenge_method=S256`,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": `http://localhost:3000`,
-          },
-        }
-      );
-      // if (window.location.href.includes("auth_code")) {
-      //   router.push("/auth_code");
-      // }
+      window.open(loginUrl);
     } catch (error) {
-      // router.push(`${process.env.NEXT_PUBLIC_API_URL}/login`);
-      console.log(error);
+      console.error(error);
     }
   };
   useLayoutEffect(() => {
@@ -28,3 +28,6 @@ const Login = () => {
 };
 
 export default Login;
+function base64url(arg0: any) {
+  throw new Error("Function not implemented.");
+}
