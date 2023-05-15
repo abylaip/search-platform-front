@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -25,7 +25,7 @@ const AuthCode = () => {
           mode: "no-cors",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: `Basic ${btoa(
+            Authorization: `Basic ${window.btoa(
               "search-platform-client:search-platform-secret"
             )}`,
           },
@@ -41,7 +41,7 @@ const AuthCode = () => {
       console.log(error);
     }
   };
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (router.query.code) {
       getAuthTokens();
     }
