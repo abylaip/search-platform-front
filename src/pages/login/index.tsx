@@ -17,7 +17,7 @@ const Login = () => {
     const loginUrl = `${authorizationEndpoint}?response_type=${responseType}&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}&code_challenge=${codeChallenge}&code_challenge_method=${codeChallengeMethod}`;
 
     try {
-      window.open(loginUrl);
+      window.location.href = loginUrl;
     } catch (error) {
       console.error(error);
     }
