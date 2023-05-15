@@ -21,6 +21,9 @@ const AuthCode = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
         params,
         {
+          headers: {
+            "Access-Control-Allow-Origin": `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
+          },
           auth: {
             username: "search-platform-client",
             password: "search-platform-secret",
