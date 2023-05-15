@@ -31,9 +31,10 @@ const AuthCode = () => {
     //     body: params,
     //   }
     // );
+
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
+        `https://cors-anywhere.herokuapp.com/${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
         params,
         {
           headers: {
