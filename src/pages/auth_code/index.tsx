@@ -5,7 +5,7 @@ import axios from "axios";
 const AuthCode = () => {
   const router = useRouter();
   const getAuthTokens = async () => {
-    const params = new FormData();
+    const params = new URLSearchParams();
     params.append("grant_type", "authorization_code");
     params.append("code", String(router.query.code));
     params.append("redirect_uri", `${window.location.origin}/auth_code`);
@@ -16,22 +16,24 @@ const AuthCode = () => {
     );
     params.append("scope", "openid");
     params.append("response_type", "code");
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization:
+            "Basic " + btoa("search-platform-client:search-platform-secret"),
+        },
+        body: params,
+      }
+    );
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
-        params,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
-          },
-          auth: {
-            username: "search-platform-client",
-            password: "search-platform-secret",
-          },
-        }
-      );
-      if (response.status === 200) {
-        console.log(response);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.error("Request failed with status:", response.status);
       }
     } catch (error) {
       console.log(error);
