@@ -17,36 +17,23 @@ const AuthCode = () => {
     params.append("scope", "openid");
     params.append("response_type", "code");
 
-    // const response = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
-    //   {
-    //     method: "POST",
-    //     mode: "no-cors",
-    //     headers: {
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //       Authorization: `Basic ${window.btoa(
-    //         "search-platform-client:search-platform-secret"
-    //       )}`,
-    //     },
-    //     body: params,
-    //   }
-    // );
-
     try {
-      const response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
-        params,
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
         {
+          method: "POST",
+          mode: "no-cors",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             Authorization: `Basic ${window.btoa(
               "search-platform-client:search-platform-secret"
             )}`,
           },
+          body: params,
         }
       );
-      if (response.status) {
-        console.log(response);
+      if (response.ok) {
+        console.log(response.json());
       } else {
         console.error("Request failed with status:", response.status);
       }
