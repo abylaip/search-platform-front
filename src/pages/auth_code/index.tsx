@@ -8,13 +8,13 @@ const AuthCode = () => {
     params.append("grant_type", "authorization_code");
     params.append("code", String(router.query.code));
     params.append("redirect_uri", `${window.location.origin}/auth_code`);
-    // params.append("client_id", "search-platform-client");
+    params.append("client_id", "search-platform-client");
     params.append(
       "code_verifier",
       "Gk7tJtkC.W3YGKC0wQc.VALTtAcKesea2DAoa73fKbvNS.7AmJ1rbEo1Q9w9bCx43HFQCRy7tugZM8Y9IWKgbwIs3WRZ3pAsDh.8Wfar3MK-ah~EriVHPB8Vttentctm"
     );
-    // params.append("scope", "openid");
-    // params.append("response_type", "code");
+    params.append("scope", "openid");
+    params.append("response_type", "code");
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
