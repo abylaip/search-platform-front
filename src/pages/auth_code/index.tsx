@@ -16,10 +16,12 @@ const AuthCode = () => {
     );
     params.append("scope", "openid");
     params.append("response_type", "code");
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
       {
         method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Authorization:
