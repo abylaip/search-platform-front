@@ -24,7 +24,8 @@ const AuthCode = () => {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Authorization:
-            "Basic " + btoa("search-platform-client:search-platform-secret"),
+            "Basic " +
+            window.btoa("search-platform-client:search-platform-secret"),
         },
         body: params,
       }

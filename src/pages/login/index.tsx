@@ -1,9 +1,6 @@
 import { useLayoutEffect } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
 
 const Login = () => {
-  const router = useRouter();
   const redirectToLogin = async () => {
     const authorizationEndpoint =
       "https://0cc5-178-90-95-197.ngrok-free.app/oauth2/authorize";
