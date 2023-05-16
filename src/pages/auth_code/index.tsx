@@ -25,9 +25,7 @@ const AuthCode = () => {
           mode: "no-cors",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: `Basic ${window.btoa(
-              "search-platform-client:search-platform-secret"
-            )}`,
+            Authorization: `Basic c2VhcmNoLXBsYXRmb3JtLWNsaWVudDpzZWFyY2gtcGxhdGZvcm0tc2VjcmV0`,
           },
           body: params,
         }
