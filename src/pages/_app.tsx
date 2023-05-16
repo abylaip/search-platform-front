@@ -13,9 +13,11 @@ const TopProgressBar = dynamic(
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <SearchWrapper>
+    <>
       <TopProgressBar />
-      <Component {...pageProps} />
-    </SearchWrapper>
+      <SearchWrapper>
+        <Component {...pageProps} />
+      </SearchWrapper>
+    </>
   );
 }

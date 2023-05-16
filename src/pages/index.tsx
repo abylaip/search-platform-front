@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@components";
 import Image from "next/image";
 
@@ -18,6 +18,13 @@ const DiplomasPage = () => {
     employees: "",
     vacancy: "",
   });
+  useEffect(() => {
+    const fetchAPI = async () => {
+      const res = await fetch(`https://api.publicapis.org/entries`);
+      console.log(res);
+    };
+    fetchAPI();
+  }, []);
   return (
     <>
       <Header />

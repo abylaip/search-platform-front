@@ -34,16 +34,12 @@ export const Header = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="px-32 flex w-full space-x-10">
-        <Link href="/" className="text-accent font-bold text-3xl leading-9">
+        <p className="text-accent font-bold text-3xl leading-9 cursor-default">
           SP
-        </Link>
+        </p>
         <div className="w-full flex space-x-20 items-center justify-between text-lg leading-5 text-high-contrast">
-          <p
-            className={`${
-              router.pathname === "/diplomas" ? "font-semibold" : ""
-            }`}
-          >
-            <Link href="/diplomas">Дипломные работы</Link>
+          <p className={`${router.pathname === "/" ? "font-semibold" : ""}`}>
+            <Link href="/">Дипломные работы</Link>
           </p>
           {isAuth ? (
             <Link href="/profile">
@@ -67,6 +63,15 @@ export const Header = () => {
                 }`}
               >
                 Войти
+              </Link>
+              <p>/</p>
+              <Link
+                href="/registration"
+                className={`${
+                  router.pathname === "/registration" ? "font-semibold" : ""
+                }`}
+              >
+                Регистрация
               </Link>
             </div>
           )}
