@@ -25,7 +25,7 @@ const AuthCode = () => {
           mode: "no-cors",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: `Basic c2VhcmNoLXBsYXRmb3JtLWNsaWVudDpzZWFyY2gtcGxhdGZvcm0tc2VjcmV0`,
+            Authorization: `Bearer eyJ4NXQjUzI1NiI6ImxBN0hmWk1IQXRzcXhqTEhsdjRUSFNySVJYM1BYcXMyQ0U4dDM1VFpjWUEiLCJraWQiOiJzZWFyY2gtcGxhdGZvcm0iLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODIiLCJzdWIiOiJzZWFyY2gtcGxhdGZvcm0tY2xpZW50IiwiYXVkIjoic2VhcmNoLXBsYXRmb3JtLWNsaWVudCIsIm5iZiI6MTY4NDI0OTg2OSwiZXhwIjoxNjg0MjUwNzY5LCJpYXQiOjE2ODQyNDk4Njl9.je9BwGqzrPr-I5idajcO3aFM6WV9aeMpnhZOIXeskqwLOxbuOlRlDOMqp-kZxy8pWS1hcAvAF2i_nORcam8nc8_9KYqxHM_KmiY3t0V88DQJGOYEzSdCEQ3r61pJcd91BeJMBxTHSlvzjB13HX5vRTOEUq7EnQlANUUItDCLfdEsu_dWsEhhOxXcBU_Ly-fyTi4KL-6wAMxdnTjiRgvcvZMOz5YsMLkRi892XlKHSd2L7fy7GDCCDz0ZFlNs0pLxPmUupa8SdNN_jyEcgZORPMiJ9A05rFyVBFrGyxucPNBJXSnHDDl_w8HLbqp8hPDyB4ZH2ctZw7B-HDMnOEM1bQ`,
           },
           body: params,
         }
