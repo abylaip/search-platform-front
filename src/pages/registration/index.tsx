@@ -1,8 +1,35 @@
+import { useState } from "react";
 import { Header } from "@components";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const Register = () => {
+  const router = useRouter();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const registrationRequest = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
+        {
+          email: user.email,
+          password: user.password,
+          confirmPassword: user.confirmPassword,
+          agreement: true,
+        }
+      );
+      if (response.status === 201) {
+        router.push("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Header />
@@ -17,6 +44,7 @@ const Register = () => {
                 type="email"
                 placeholder="Введите email"
                 className="rounded-md border border-gray-300 p-2"
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </div>
             <div className="flex flex-col space-y-2">
@@ -27,6 +55,7 @@ const Register = () => {
                 type="password"
                 placeholder="Введите пароль"
                 className="rounded-md border border-gray-300 p-2"
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
             </div>
             <div className="flex flex-col space-y-2">
@@ -37,10 +66,16 @@ const Register = () => {
                 type="password"
                 placeholder="Введите пароль"
                 className="rounded-md border border-gray-300 p-2"
+                onChange={(e) =>
+                  setUser({ ...user, confirmPassword: e.target.value })
+                }
               />
             </div>
             <div className="flex flex-col space-y-4">
-              <button className="bg-accent rounded-md w-full py-3 text-white font-semibold leading-5">
+              <button
+                onClick={registrationRequest}
+                className="bg-accent rounded-md w-full py-3 text-white font-semibold leading-5"
+              >
                 Регистрация
               </button>
               <Link
