@@ -22,10 +22,9 @@ const AuthCode = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
         {
           method: "POST",
-          mode: "no-cors",
           headers: {
-            "Content-Type": "application/url-form-encoded",
             Authorization: `Basic c2VhcmNoLXBsYXRmb3JtLWNsaWVudDpzZWFyY2gtcGxhdGZvcm0tc2VjcmV0`,
+            "Content-Type": "application/x-www-form-urlencoded",
           },
           body: params,
         }
