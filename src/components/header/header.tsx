@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Image from "next/image";
+import Cookies from "js-cookie";
 
 export const Header = ({ isAuth }: { isAuth: boolean }) => {
   const router = useRouter();
@@ -113,6 +113,8 @@ export const Header = ({ isAuth }: { isAuth: boolean }) => {
                 </button>
                 <button
                   onClick={() => {
+                    Cookies.remove("access_token");
+                    Cookies.remove("refresh_token");
                     window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/logout`;
                     setShowDropDown(false);
                   }}
