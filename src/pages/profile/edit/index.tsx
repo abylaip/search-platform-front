@@ -14,10 +14,10 @@ const EditProfile = () => {
     name: user_data?.firstName || "",
     surname: user_data?.surname || "",
     birthDate: user_data?.birthDate || "",
-    IIN: user_data?.profile.id || "",
+    IIN: user_data?.profile?.id || "",
     phoneNumber: user_data?.phoneNumber || "",
     email: user_data?.email || "",
-    organization_id: user_data?.profile.organization?.id || "",
+    organization_id: user_data?.profile?.organization?.id || "",
   });
 
   const { data, error } = useFetch<IOrganization>(
