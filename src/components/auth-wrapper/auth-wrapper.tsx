@@ -36,17 +36,13 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
           expires,
         });
         Cookies.set("refresh_token", data.refresh_token);
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
+        await router.push("/");
         console.log("page refreshed");
       } else {
         console.error("Request failed with status:", response.status);
-        router.push("/login");
       }
     } catch (error) {
       console.log(error);
-      router.push("/login");
     }
   };
   useEffect(() => {

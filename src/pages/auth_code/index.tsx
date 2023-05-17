@@ -41,7 +41,7 @@ const AuthCode = () => {
         });
         Cookies.set("refresh_token", data.refresh_token);
         setLoggedIn(true);
-        router.push("/");
+        await router.push("/");
       } else {
         console.error("Request failed with status:", response.status);
       }
