@@ -60,7 +60,7 @@ const AuthCode = () => {
         <p className="text-green-500 font-bold">Вы зашли</p>
       ) : (
         <ClipLoader
-          color={"#ffffff"}
+          color={"#7a7777"}
           loading={true}
           size={35}
           aria-label="Loading Spinner"
