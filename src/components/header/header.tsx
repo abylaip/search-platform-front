@@ -113,6 +113,7 @@ export const Header = ({ isAuth }: { isAuth: boolean }) => {
                 </button>
                 <button
                   onClick={() => {
+                    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/logout`;
                     setShowDropDown(false);
                   }}
                   className="py-2 px-3 text-sm hover:bg-slate-100 hover:text-red-500 focus:bg-slate-300"
