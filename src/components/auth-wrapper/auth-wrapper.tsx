@@ -1,4 +1,4 @@
-import { useEffect, ReactNode } from "react";
+import { useEffect, ReactNode, useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { IToken } from "@types";
@@ -6,6 +6,7 @@ import { Header } from "..";
 
 export const AuthWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
+  const [isAuth, setIsAuth] = useState(false);
   const refresh_token = Cookies.get("refresh_token");
   const expires = new Date();
   expires.setMinutes(expires.getMinutes() + 15);
@@ -53,11 +54,13 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
       router.push("/login");
     } else if (!Cookies.get("access_token") && Cookies.get("refresh_token")) {
       getAuthTokens();
+    } else {
+      setIsAuth(true);
     }
   }, [router.pathname]);
   return (
     <>
-      <Header />
+      <Header isAuth={isAuth} />
       {children}
     </>
   );

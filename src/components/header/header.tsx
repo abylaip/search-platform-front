@@ -4,9 +4,8 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 
-export const Header = () => {
+export const Header = ({ isAuth }: { isAuth: boolean }) => {
   const router = useRouter();
-  const [isAuth, setIsAuth] = useState(true);
   const [showDropDown, setShowDropDown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
