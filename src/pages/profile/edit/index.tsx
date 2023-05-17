@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { phoneNumberMask } from "src/utils/phoneNumberMask";
 import { useFetch } from "@hooks";
@@ -14,15 +14,27 @@ const EditProfile = () => {
     name: user_data?.firstName || "",
     surname: user_data?.surname || "",
     birthDate: user_data?.birthDate || "",
-    IIN: user_data?.profile?.id || "",
+    IIN: user_data?.profile?.iin || "",
     phoneNumber: user_data?.phoneNumber || "",
     email: user_data?.email || "",
-    organization_id: user_data?.profile?.organization?.id || "",
+    organization_id: "",
   });
 
   const { data, error } = useFetch<IOrganization>(
     `${process.env.NEXT_PUBLIC_API_URL}/organization`
   );
+
+  useEffect(() => {
+    setUser({
+      name: user_data?.firstName || "",
+      surname: user_data?.surname || "",
+      birthDate: user_data?.birthDate || "",
+      IIN: user_data?.profile?.iin || "",
+      phoneNumber: user_data?.phoneNumber || "",
+      email: user_data?.email || "",
+      organization_id: "",
+    });
+  }, [user_data]);
 
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const number = phoneNumberMask(e.target.value);
