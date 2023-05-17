@@ -2,15 +2,27 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import ClipLoader from "react-spinners/ClipLoader";
 import { phoneNumberMask } from "src/utils/phoneNumberMask";
-import { useFetch } from "@hooks";
+import { useFetch, useMutation } from "@hooks";
 import { IOrganization, IUser } from "@types";
 
 const EditProfile = () => {
   let user_id =
     typeof window !== "undefined" ? localStorage.getItem("user_id") : null;
+
   const { data: user_data, error: user_error } = useFetch<IUser>(
     `${process.env.NEXT_PUBLIC_API_URL}/users/${user_id}`
   );
+
+  const { data, error } = useFetch<IOrganization>(
+    `${process.env.NEXT_PUBLIC_API_URL}/organization`
+  );
+
+  const [response, callAPI] = useMutation<IUser>(
+    `${process.env.NEXT_PUBLIC_API_URL}/users`
+  );
+
+  const { isLoading } = response;
+
   const [user, setUser] = useState({
     name: user_data?.firstName || "",
     surname: user_data?.surname || "",
@@ -20,10 +32,6 @@ const EditProfile = () => {
     email: user_data?.email || "",
     organization_id: "",
   });
-
-  const { data, error } = useFetch<IOrganization>(
-    `${process.env.NEXT_PUBLIC_API_URL}/organization`
-  );
 
   useEffect(() => {
     setUser({
@@ -48,9 +56,9 @@ const EditProfile = () => {
   };
 
   const handleSubmit = () => {
-    const uploadUser = { ...user };
-    uploadUser.birthDate = format(new Date(user.birthDate), "dd.MM.yyyy");
-    uploadUser.phoneNumber =
+    const userPayload = { ...user };
+    userPayload.birthDate = format(new Date(user.birthDate), "dd.MM.yyyy");
+    userPayload.phoneNumber =
       user.phoneNumber[0] === "+"
         ? user.phoneNumber
             .substring(1, user.phoneNumber.length)
@@ -59,7 +67,21 @@ const EditProfile = () => {
             .substring(2, user.phoneNumber.length)
             .replace(/\s/g, "")
             .replace(/^/, "7");
-    console.log(uploadUser);
+
+    callAPI({
+      id: user_id,
+      email: userPayload.email,
+      firstName: userPayload.name,
+      surname: userPayload.surname,
+      birthDate: userPayload.birthDate,
+      phoneNumber: userPayload.phoneNumber,
+      profile: {
+        iin: userPayload.IIN,
+        organization: {
+          id: userPayload.organization_id,
+        },
+      },
+    });
   };
 
   return (
@@ -73,15 +95,16 @@ const EditProfile = () => {
         <section className="rounded-lg bg-white shadow-lg py-5 px-7 flex flex-col space-y-4">
           <div className="flex flex-rol space-x-3">
             <h2 className="text-3xl font-bold">Редактировать личные данные</h2>
-            {!data && (
-              <ClipLoader
-                color={"#ffffff"}
-                loading={true}
-                size={35}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
-            )}
+            {!user_data ||
+              (isLoading && (
+                <ClipLoader
+                  color={"#ffffff"}
+                  loading={true}
+                  size={35}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ))}
           </div>
           <div className="grid grid-cols-2 gap-5">
             <div className="flex flex-col space-y-2">
