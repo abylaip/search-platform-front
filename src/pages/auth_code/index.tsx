@@ -44,7 +44,6 @@ const AuthCode = () => {
         router.push("/");
       } else {
         console.error("Request failed with status:", response.status);
-        router.push("/login");
       }
     } catch (error) {
       console.log(error);
