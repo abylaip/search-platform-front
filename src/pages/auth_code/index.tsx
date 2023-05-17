@@ -44,9 +44,6 @@ const AuthCode = () => {
         setTimeout(() => {
           router.push("/");
         }, 1000);
-      } else {
-        console.error("Request failed with status:", response.status);
-        router.push("/login");
       }
     } catch (error) {
       console.log(error);
