@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Header } from "@components";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { Header } from "@components";
 
 interface Content {
   name: string;
@@ -19,6 +20,7 @@ const DiplomasPage = () => {
     vacancy: "",
   });
   useEffect(() => {
+    console.log(Cookies.get("access_token"));
     const fetchAPI = async () => {
       const res = await fetch(`https://api.publicapis.org/entries`);
       console.log(res);

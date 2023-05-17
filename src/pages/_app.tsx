@@ -1,7 +1,7 @@
 import "@styles/globals.css";
 import "nprogress/nprogress.css";
 import type { AppProps } from "next/app";
-import { SearchWrapper } from "@components";
+import { SearchWrapper, AuthWrapper } from "@components";
 import dynamic from "next/dynamic";
 
 const TopProgressBar = dynamic(
@@ -15,9 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <TopProgressBar />
-      <SearchWrapper>
-        <Component {...pageProps} />
-      </SearchWrapper>
+      <AuthWrapper>
+        <SearchWrapper>
+          <Component {...pageProps} />
+        </SearchWrapper>
+      </AuthWrapper>
     </>
   );
 }

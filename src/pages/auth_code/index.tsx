@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import Cookies from "js-cookie";
+import { IToken } from "@types";
 
 const AuthCode = () => {
   const router = useRouter();
+  const [loggedIn, setLoggedIn] = useState(false);
   const getAuthTokens = async () => {
     const params = new URLSearchParams();
     params.append("grant_type", "authorization_code");
@@ -30,7 +32,15 @@ const AuthCode = () => {
         }
       );
       if (response.ok) {
-        console.log(response.json());
+        const data: IToken = await response.json();
+        Cookies.set("access_token", data.access_token, {
+          expires: data.expires_in,
+        });
+        Cookies.set("refresh_token", data.refresh_token);
+        setLoggedIn(true);
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
       } else {
         console.error("Request failed with status:", response.status);
       }
@@ -43,6 +53,15 @@ const AuthCode = () => {
       getAuthTokens();
     }
   }, [router.query]);
+  return (
+    <div className="w-full flex flex-row justify-center pt-10">
+      {loggedIn ? (
+        <p className="text-green-500 font-bold">Вы зашли</p>
+      ) : (
+        <p className="text-red-800 font-bold">Не получилось зайти</p>
+      )}
+    </div>
+  );
 };
 
 export default AuthCode;
