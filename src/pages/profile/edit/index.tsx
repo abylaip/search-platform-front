@@ -5,7 +5,10 @@ import { useFetch } from "@hooks";
 import { IOrganization, IUser } from "@types";
 
 const EditProfile = () => {
-  const user_id = localStorage.getItem("user_id");
+  let user_id: string | null = "";
+  if (typeof window !== "undefined") {
+    user_id = localStorage.getItem("user_id");
+  }
   const { data: user_data, error: user_error } = useFetch<IUser>(
     `${process.env.NEXT_PUBLIC_APP}/users/${user_id}`
   );
