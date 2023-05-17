@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
+import ClipLoader from "react-spinners/ClipLoader";
 import { phoneNumberMask } from "src/utils/phoneNumberMask";
 import { useFetch } from "@hooks";
 import { IOrganization, IUser } from "@types";
@@ -70,7 +71,18 @@ const EditProfile = () => {
           <span className="font-semibold text-accent">Редактировать</span>
         </p>
         <section className="rounded-lg bg-white shadow-lg py-5 px-7 flex flex-col space-y-4">
-          <h2 className="text-3xl font-bold">Редактировать личные данные</h2>
+          <div className="flex flex-rol space-x-3">
+            <h2 className="text-3xl font-bold">Редактировать личные данные</h2>
+            {!data && (
+              <ClipLoader
+                color={"#ffffff"}
+                loading={true}
+                size={35}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            )}
+          </div>
           <div className="grid grid-cols-2 gap-5">
             <div className="flex flex-col space-y-2">
               <p className="">Ваше имя:</p>
