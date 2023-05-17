@@ -41,13 +41,13 @@ const AuthCode = () => {
         });
         Cookies.set("refresh_token", data.refresh_token);
         setLoggedIn(true);
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
+        router.push("/");
+      } else {
+        console.error("Request failed with status:", response.status);
+        router.push("/login");
       }
     } catch (error) {
       console.log(error);
-      router.push("/login");
     }
   };
   useEffect(() => {
