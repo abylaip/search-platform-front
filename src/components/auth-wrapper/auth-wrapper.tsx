@@ -45,6 +45,7 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
       }
     } catch (error) {
       console.log(error);
+      await router.push("/auth_code");
     }
   };
   useEffect(() => {

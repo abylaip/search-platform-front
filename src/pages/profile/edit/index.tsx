@@ -5,12 +5,10 @@ import { useFetch } from "@hooks";
 import { IOrganization, IUser } from "@types";
 
 const EditProfile = () => {
-  let user_id: string | null = "";
-  if (typeof window !== "undefined") {
-    user_id = localStorage.getItem("user_id");
-  }
+  let user_id =
+    typeof window !== "undefined" ? localStorage.getItem("user_id") : null;
   const { data: user_data, error: user_error } = useFetch<IUser>(
-    `${process.env.NEXT_PUBLIC_APP}/users/${user_id}`
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${user_id}`
   );
   const [user, setUser] = useState({
     name: user_data?.firstName || "",
@@ -21,8 +19,6 @@ const EditProfile = () => {
     email: user_data?.email || "",
     organization_id: user_data?.profile.organization?.id || "",
   });
-
-  console.log(user_data);
 
   const { data, error } = useFetch<IOrganization>(
     `${process.env.NEXT_PUBLIC_API_URL}/organization`
