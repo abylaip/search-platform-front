@@ -1,11 +1,9 @@
-import { Header } from "@components";
 import Image from "next/image";
 import { Switch } from "@ui";
 
 const Profile = () => {
   return (
     <>
-      <Header />
       <div className="px-32 py-5 flex flex-col space-y-5">
         <p className="text-gray-400 cursor-default">
           Главная страница /{" "}

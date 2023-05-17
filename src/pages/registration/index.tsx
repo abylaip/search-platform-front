@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Header } from "@components";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
@@ -32,7 +31,6 @@ const Register = () => {
   };
   return (
     <>
-      <Header />
       <div className="flex flex-row">
         <div className="flex-1 container 2xl:w-4/5 flex items-center justify-center h-full pt-36">
           <div className="flex flex-col space-y-4 rounded-lg bg-white p-10 xl:w-11/12 monic:w-8/12 shadow-lg">

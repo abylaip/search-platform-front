@@ -34,8 +34,10 @@ const AuthCode = () => {
       );
       if (response.ok) {
         const data: IToken = await response.json();
+        const expires = new Date();
+        expires.setMinutes(expires.getMinutes() + 15);
         Cookies.set("access_token", data.access_token, {
-          expires: data.expires_in,
+          expires,
         });
         Cookies.set("refresh_token", data.refresh_token);
         setLoggedIn(true);

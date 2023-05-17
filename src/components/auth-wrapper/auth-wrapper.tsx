@@ -2,6 +2,7 @@ import { useEffect, ReactNode } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { IToken } from "@types";
+import { Header } from "..";
 
 export const AuthWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
@@ -29,8 +30,10 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
       );
       if (response.ok) {
         const data: IToken = await response.json();
+        const expires = new Date();
+        expires.setMinutes(expires.getMinutes() + 15);
         Cookies.set("access_token", data.access_token, {
-          expires: data.expires_in,
+          expires,
         });
         Cookies.set("refresh_token", data.refresh_token);
         setTimeout(() => {
@@ -53,5 +56,10 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
       getAuthTokens();
     }
   }, [router.pathname]);
-  return <>{children}</>;
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
 };

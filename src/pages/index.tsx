@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import { Header } from "@components";
 
 interface Content {
   name: string;
@@ -29,7 +28,6 @@ const DiplomasPage = () => {
   }, []);
   return (
     <>
-      <Header />
       <div className="px-32 py-5 flex flex-col space-y-5">
         <p className="text-gray-400 cursor-default">
           Главная страница /{" "}
