@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import ClipLoader from "react-spinners/ClipLoader";
 import { IToken } from "@types";
 
 const AuthCode = () => {
@@ -43,9 +44,11 @@ const AuthCode = () => {
         }, 1000);
       } else {
         console.error("Request failed with status:", response.status);
+        router.push("/login");
       }
     } catch (error) {
       console.log(error);
+      router.push("/login");
     }
   };
   useEffect(() => {
@@ -58,7 +61,13 @@ const AuthCode = () => {
       {loggedIn ? (
         <p className="text-green-500 font-bold">Вы зашли</p>
       ) : (
-        <p className="text-red-800 font-bold">Не получилось зайти</p>
+        <ClipLoader
+          color={"#ffffff"}
+          loading={true}
+          size={35}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
       )}
     </div>
   );
