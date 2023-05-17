@@ -7,6 +7,8 @@ import { Header } from "..";
 export const AuthWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const refresh_token = Cookies.get("refresh_token");
+  const expires = new Date();
+  expires.setMinutes(expires.getMinutes() + 15);
   const getAuthTokens = async () => {
     const params = new URLSearchParams();
     params.append("grant_type", "refresh_token");
@@ -30,13 +32,11 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
       );
       if (response.ok) {
         const data: IToken = await response.json();
-        const expires = new Date();
-        expires.setMinutes(expires.getMinutes() + 15);
         Cookies.set("access_token", data.access_token, {
           expires,
         });
         Cookies.set("refresh_token", data.refresh_token);
-        await router.push("/");
+        // await router.push("/");
         console.log("page refreshed");
       } else {
         console.error("Request failed with status:", response.status);
