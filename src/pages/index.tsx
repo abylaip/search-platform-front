@@ -18,14 +18,6 @@ const DiplomasPage = () => {
     employees: "",
     vacancy: "",
   });
-  useEffect(() => {
-    console.log(Cookies.get("access_token"));
-    const fetchAPI = async () => {
-      const res = await fetch(`https://api.publicapis.org/entries`);
-      console.log(res);
-    };
-    fetchAPI();
-  }, []);
   return (
     <>
       <div className="px-32 py-5 flex flex-col space-y-5">

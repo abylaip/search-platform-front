@@ -98,7 +98,7 @@ const EditProfile = () => {
             {!user_data ||
               (isLoading && (
                 <ClipLoader
-                  color={"#ffffff"}
+                  color={"#949292"}
                   loading={true}
                   size={35}
                   aria-label="Loading Spinner"

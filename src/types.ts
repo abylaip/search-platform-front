@@ -20,10 +20,15 @@ export interface IUser {
 }
 
 export interface IDiploma {
+  content: IDiplomaContent[];
+}
+
+export interface IDiplomaContent {
   id?: number;
   createdAt: string;
   modifiedAt: string;
   name: string;
+  category: string;
   dissertAbstract: string;
   users: [
     {
@@ -41,10 +46,10 @@ export interface IDiploma {
 }
 
 export interface IOrganization {
-  content: IContent[];
+  content: IOrganizationContent[];
 }
 
-interface IContent {
+interface IOrganizationContent {
   id: number;
   nameRu: string;
 }
