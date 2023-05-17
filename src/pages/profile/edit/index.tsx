@@ -14,7 +14,7 @@ const EditProfile = () => {
     email: "",
     organization_id: "",
   });
-  const { data, error } = useFetch<IOrganization[]>(
+  const { data, error } = useFetch<IOrganization>(
     `${process.env.NEXT_PUBLIC_API_URL}/organization`
   );
 
@@ -127,7 +127,7 @@ const EditProfile = () => {
                   }
                 >
                   {!!data &&
-                    data.map((item) => (
+                    data.content.map((item) => (
                       <option value={`${item.id}`} key={`${item.id}`}>
                         {item.nameRu}
                       </option>

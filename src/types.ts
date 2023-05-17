@@ -41,6 +41,10 @@ export interface IDiploma {
 }
 
 export interface IOrganization {
+  content: IContent[];
+}
+
+interface IContent {
   id: number;
   nameRu: string;
 }
