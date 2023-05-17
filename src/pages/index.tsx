@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Cookies from "js-cookie";
+import { useFetch } from "@hooks";
+import { IDiploma } from "@types";
 
 interface Content {
   name: string;
@@ -18,6 +19,11 @@ const DiplomasPage = () => {
     employees: "",
     vacancy: "",
   });
+  const { data, error } = useFetch<IDiploma>(
+    `${process.env.NEXT_PUBLIC_API_URL}/dissertation`
+  );
+  console.log(data);
+
   return (
     <>
       <div className="px-32 py-5 flex flex-col space-y-5">
