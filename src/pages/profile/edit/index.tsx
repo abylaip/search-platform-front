@@ -15,7 +15,7 @@ const EditProfile = () => {
     organization_id: "",
   });
   const { data, error } = useFetch<IOrganization[]>(
-    `${process.env.NEXT_PUBLIC_API_URL}/organizations`
+    `${process.env.NEXT_PUBLIC_API_URL}/organization`
   );
 
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
