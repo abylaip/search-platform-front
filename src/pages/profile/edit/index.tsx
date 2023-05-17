@@ -1,4 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { format } from "date-fns";
+import { phoneNumberMask } from "src/utils/phoneNumberMask";
+import { useFetch } from "@hooks";
+import { IOrganization } from "@types";
 
 const EditProfile = () => {
   const [user, setUser] = useState({
@@ -10,27 +14,35 @@ const EditProfile = () => {
     email: "",
     organization_id: "",
   });
-  const phoneNumberMask = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value;
-    val = val.replace(/ /gm, "");
-    console.log(val);
+  const { data, error } = useFetch<IOrganization[]>(
+    `${process.env.NEXT_PUBLIC_API_URL}/organizations`
+  );
 
-    let num = `${val[0] === "+" ? val.substring(0, 2) : val.substring(0, 1)} ${
-      val[0] === "+" ? val.substring(2, 5) : val.substring(1, 4)
-    } ${val[0] === "+" ? val.substring(5, 8) : val.substring(4, 7)} ${
-      val[0] === "+"
-        ? val.substring(8, val.length)
-        : val.substring(7, val.length)
-    }`;
-
-    num = num.trim();
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const number = phoneNumberMask(e.target.value);
     if (
-      (val[0] === "+" && num.length < 16) ||
-      (val[0] === "8" && num.length < 15)
+      (number[0] === "+" && number.length <= 15) ||
+      (number[0] === "8" && number.length <= 14)
     ) {
-      setUser({ ...user, phoneNumber: num });
+      setUser({ ...user, phoneNumber: number });
     }
   };
+
+  const handleSubmit = () => {
+    const uploadUser = { ...user };
+    uploadUser.birthDate = format(new Date(user.birthDate), "dd.MM.yyyy");
+    uploadUser.phoneNumber =
+      user.phoneNumber[0] === "+"
+        ? user.phoneNumber
+            .substring(1, user.phoneNumber.length)
+            .replace(/\s/g, "")
+        : user.phoneNumber
+            .substring(2, user.phoneNumber.length)
+            .replace(/\s/g, "")
+            .replace(/^/, "7");
+    console.log(uploadUser);
+  };
+
   return (
     <>
       <div className="px-32 py-5 flex flex-col space-y-5">
@@ -80,6 +92,7 @@ const EditProfile = () => {
                 placeholder="Введите ИИН"
                 className="w-full p-3 border outline-none rounded-lg"
                 value={user.IIN}
+                maxLength={12}
                 onChange={(e) => setUser({ ...user, IIN: e.target.value })}
               />
             </div>
@@ -90,7 +103,7 @@ const EditProfile = () => {
                 placeholder="Введите номер телефона"
                 className="w-full p-3 border outline-none rounded-lg"
                 value={user.phoneNumber}
-                onChange={(e) => phoneNumberMask(e)}
+                onChange={(e) => handlePhoneNumberChange(e)}
               />
             </div>
             <div className="flex flex-col space-y-2">
@@ -98,26 +111,35 @@ const EditProfile = () => {
               <input
                 type="email"
                 placeholder="Введите email"
-                className="w-full p-3 border outline-none rounded-lg"
+                className="w-full p-3 border outline-none rounded-lg cursor-not-allowed"
                 value={user.email}
+                disabled
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </div>
             <div className="flex flex-col space-y-2">
               <p className="">Ваша организация:</p>
               <div className="w-full p-3 border outline-none rounded-lg">
-                <select className="w-full outline-none">
-                  <option value="" key="">
-                    ASd
-                  </option>
-                  <option value="" key="">
-                    ASd
-                  </option>
+                <select
+                  className="w-full outline-none"
+                  onChange={(e) =>
+                    setUser({ ...user, organization_id: e.target.value })
+                  }
+                >
+                  {!!data &&
+                    data.map((item) => (
+                      <option value={`${item.id}`} key={`${item.id}`}>
+                        {item.nameRu}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>
             <div></div>
-            <button className="w-full p-3 bg-accent text-white rounded-lg">
+            <button
+              onClick={handleSubmit}
+              className="w-full p-3 bg-accent text-white rounded-lg"
+            >
               Сохранить
             </button>
           </div>

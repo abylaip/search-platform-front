@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useReducer, useEffect, useRef } from "react";
 
 interface State<T> {
@@ -17,6 +18,7 @@ export function useFetch<T = unknown>(
   options?: RequestInit
 ): State<T> {
   const cache = useRef<Cache<T>>({});
+  const access_token = Cookies.get("access_token");
 
   const cancelRequest = useRef<boolean>(false);
 
@@ -54,7 +56,14 @@ export function useFetch<T = unknown>(
       }
 
       try {
-        const response = await fetch(url, options);
+        const response = await fetch(
+          url,
+          options || {
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error(response.statusText);
         }
