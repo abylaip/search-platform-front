@@ -22,6 +22,7 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
     params.append("response_type", "code");
 
     try {
+      await router.push("/auth_code");
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
         {
@@ -45,7 +46,6 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
       }
     } catch (error) {
       console.log(error);
-      await router.push("/auth_code");
     }
   };
   useEffect(() => {
@@ -62,6 +62,7 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
     } else if (!Cookies.get("access_token") && Cookies.get("refresh_token")) {
       getAuthTokens();
     } else {
+      router.push("/");
       setIsAuth(true);
     }
   }, [router.pathname]);

@@ -105,6 +105,13 @@ const EditProfile = () => {
                   data-testid="loader"
                 />
               ))}
+            <ClipLoader
+              color={"#949292"}
+              loading={true}
+              size={35}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
           </div>
           <div className="grid grid-cols-2 gap-5">
             <div className="flex flex-col space-y-2">
