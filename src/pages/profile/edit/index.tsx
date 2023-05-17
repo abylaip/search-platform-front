@@ -126,6 +126,7 @@ const EditProfile = () => {
                     setUser({ ...user, organization_id: e.target.value })
                   }
                 >
+                  <option value="">Выбрать</option>
                   {!!data &&
                     data.content.map((item) => (
                       <option value={`${item.id}`} key={`${item.id}`}>

@@ -3,10 +3,12 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { IToken } from "@types";
 import { Header } from "..";
+import jwtDecode from "jwt-decode";
 
 export const AuthWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const [isAuth, setIsAuth] = useState(false);
+  const access_token = Cookies.get("access_token");
   const refresh_token = Cookies.get("refresh_token");
   const expires = new Date();
   expires.setMinutes(expires.getMinutes() + 15);
@@ -46,6 +48,11 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
     }
   };
   useEffect(() => {
+    if (access_token) {
+      const token: any = jwtDecode(access_token);
+      console.log(token);
+      localStorage.setItem("user_id", token.id);
+    }
     if (
       !Cookies.get("access_token") &&
       !Cookies.get("refresh_token") &&
