@@ -9,7 +9,7 @@ export interface IUser {
   profile: {
     id?: number;
     iin: string;
-    organization: {
+    organization?: {
       id?: 0;
       nameKk: string;
       nameRu: string;

@@ -2,18 +2,25 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { phoneNumberMask } from "src/utils/phoneNumberMask";
 import { useFetch } from "@hooks";
-import { IOrganization } from "@types";
+import { IOrganization, IUser } from "@types";
 
 const EditProfile = () => {
+  const user_id = localStorage.getItem("user_id");
+  const { data: user_data, error: user_error } = useFetch<IUser>(
+    `${process.env.NEXT_PUBLIC_APP}/users/${user_id}`
+  );
   const [user, setUser] = useState({
-    name: "",
-    surname: "",
-    birthDate: "",
-    IIN: "",
-    phoneNumber: "",
-    email: "",
-    organization_id: "",
+    name: user_data?.firstName || "",
+    surname: user_data?.surname || "",
+    birthDate: user_data?.birthDate || "",
+    IIN: user_data?.profile.id || "",
+    phoneNumber: user_data?.phoneNumber || "",
+    email: user_data?.email || "",
+    organization_id: user_data?.profile.organization?.id || "",
   });
+
+  console.log(user_data);
+
   const { data, error } = useFetch<IOrganization>(
     `${process.env.NEXT_PUBLIC_API_URL}/organization`
   );

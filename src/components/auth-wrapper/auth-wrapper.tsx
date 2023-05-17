@@ -50,7 +50,6 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (access_token) {
       const token: any = jwtDecode(access_token);
-      console.log(token);
       localStorage.setItem("user_id", token.id);
     }
     if (
