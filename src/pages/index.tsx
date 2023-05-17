@@ -133,13 +133,6 @@ const JobsCard = ({
         name === content.name ? "bg-blue-100" : "bg-white"
       } cursor-pointer`}
     >
-      <Image
-        src="/static/placeholder.png"
-        width={70}
-        height={70}
-        className="rounded-full object-cover w-16 h-16"
-        alt=""
-      />
       <div>
         <p className="font-semibold text-accent text-lg">{name}</p>
         <p className="text-gray-500">{field}</p>
