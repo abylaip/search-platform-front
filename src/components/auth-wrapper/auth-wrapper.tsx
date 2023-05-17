@@ -37,7 +37,6 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
         });
         Cookies.set("refresh_token", data.refresh_token);
         await router.push("/");
-        console.log("page refreshed");
       } else {
         console.error("Request failed with status:", response.status);
       }
@@ -46,9 +45,12 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
     }
   };
   useEffect(() => {
-    if (!Cookies.get("access_token") && !Cookies.get("refresh_token")) {
-      // router.push("/login");
-      console.log("asd");
+    if (
+      !Cookies.get("access_token") &&
+      !Cookies.get("refresh_token") &&
+      router.pathname !== "/auth_code"
+    ) {
+      router.push("/login");
     } else if (!Cookies.get("access_token") && Cookies.get("refresh_token")) {
       getAuthTokens();
     }
