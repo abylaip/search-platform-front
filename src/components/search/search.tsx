@@ -1,6 +1,7 @@
 import { ReactNode, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { useRouter } from "next/router";
+import { DissertationCard } from "@components/dissertation-card";
 
 export const SearchWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
@@ -52,8 +53,8 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
       )}
       {showSearchInput && (
         <TransitionSearchBar className="bg-accent bg-opacity-50">
-          <div className="flex mt-24 justify-center">
-            <div className="w-[600px] bg-white rounded-lg flex flex-row items-center px-2">
+          <div className="flex flex-col mt-24 items-center">
+            <div className="w-[800px] bg-white rounded-lg flex flex-row items-center px-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -93,6 +94,7 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
                 </svg>
               </button>
             </div>
+            <DissertationCard />
           </div>
         </TransitionSearchBar>
       )}

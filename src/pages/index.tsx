@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import { useFetch } from "@hooks";
 import { IDiploma } from "@types";
 
