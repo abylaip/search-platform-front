@@ -115,6 +115,7 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
                   category={item.category}
                   organizationName={item.organizationName}
                   dissertAbstract={item.dissertAbstract}
+                  setShowSearchInput={setShowSearchInput}
                 />
               ))
             ) : (
