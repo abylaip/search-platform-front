@@ -19,9 +19,10 @@ export const DissertationModal = ({
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation`,
     "POST"
   );
-  const { isLoading } = response;
+  const { data, isLoading } = response;
   const uploadDissertation = () => {
     postDissertationCall(dissertation);
+    !isLoading && setShowModal(false);
   };
 
   return (
@@ -59,7 +60,7 @@ export const DissertationModal = ({
                 <p className="text-center text-2xl font-semibold text-accent mb-3">
                   Загрузить дипломную работу
                 </p>
-                {isLoading ? (
+                {isLoading && (
                   <ClipLoader
                     color={"#949292"}
                     loading={true}
@@ -67,8 +68,6 @@ export const DissertationModal = ({
                     aria-label="Loading Spinner"
                     data-testid="loader"
                   />
-                ) : (
-                  setShowModal(false)
                 )}
               </div>
               <div className="flex flex-col space-y-4">
