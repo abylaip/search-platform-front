@@ -10,12 +10,12 @@ const DissertationPage = () => {
 
   return (
     <>
-      <div className="px-32 py-5 flex flex-col space-y-3">
+      <div className="px-32 py-5 flex flex-col space-y-5">
         <p className="text-gray-400 cursor-default">
           Главная страница / <span>Поиск дипломных работ</span> /{" "}
           <span className="font-semibold text-accent">Дипломная работа</span>
         </p>
-        <section className="flex flex-col space-y-4 rounded-lg bg-white shadow-lg py-5 px-7">
+        <section className="flex flex-col space-y-2 rounded-lg bg-white shadow-lg py-5 px-7">
           <p className="text-2xl font-bold text-accent">{data?.name}</p>
           <p className="text-xl">{data?.organizationName}</p>
           <p className="text-xl">
