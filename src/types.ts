@@ -30,6 +30,7 @@ export interface IDiplomaContent {
   name: string;
   category: string;
   dissertAbstract: string;
+  organizationName: string;
   users: [
     {
       id: 0;
