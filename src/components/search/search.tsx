@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import ClipLoader from "react-spinners/ClipLoader";
 import { DissertationCard } from "@components/dissertation-card";
 import { useFetch, useDebounce } from "@hooks";
-import { IDiploma } from "@types";
+import { IDiploma, IDiplomaContent } from "@types";
 
 export const SearchWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
@@ -12,7 +12,7 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
   const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce<string>(searchValue, 500);
   const [showSearchButton, setShowSearchButton] = useState(false);
-  const [filtered, setFiltered] = useState<IDiploma>();
+  const [filtered, setFiltered] = useState<IDiplomaContent[]>();
   const { data, error } = useFetch<IDiploma>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation?query=${debouncedValue}`
   );
@@ -29,9 +29,10 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    console.log("please dont pizdec");
     if (searchValue.length > 1) {
-      setFiltered(data);
+      setFiltered(data?.content);
+    } else {
+      setFiltered([]);
     }
     exceptPaths.includes(router.pathname)
       ? setShowSearchButton(false)
@@ -107,7 +108,7 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
               </button>
             </div>
             {!!filtered ? (
-              filtered.content.map((item, key) => (
+              filtered.map((item, key) => (
                 <DissertationCard
                   key={key}
                   name={item.name}
