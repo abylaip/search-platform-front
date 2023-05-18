@@ -1,13 +1,20 @@
 import { ReactNode, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { useRouter } from "next/router";
+import ClipLoader from "react-spinners/ClipLoader";
 import { DissertationCard } from "@components/dissertation-card";
+import { useFetch, useDebounce } from "@hooks";
+import { IDiploma } from "@types";
 
 export const SearchWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const debouncedValue = useDebounce<string>(searchValue, 500);
   const [showSearchButton, setShowSearchButton] = useState(false);
+  const { data, error } = useFetch<IDiploma>(
+    `${process.env.NEXT_PUBLIC_API_URL}/dissertation?query=${debouncedValue}`
+  );
 
   const exceptPaths = ["/auth/registration", "/login", "/auth_code"];
 
@@ -94,7 +101,25 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
                 </svg>
               </button>
             </div>
-            <DissertationCard />
+            {!!data ? (
+              data.content.map((item, key) => (
+                <DissertationCard
+                  key={key}
+                  name={item.name}
+                  category={item.category}
+                  organizationName={item.organizationName}
+                  dissertAbstract={item.dissertAbstract}
+                />
+              ))
+            ) : (
+              <ClipLoader
+                color={"#949292"}
+                loading={true}
+                size={30}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            )}
           </div>
         </TransitionSearchBar>
       )}
