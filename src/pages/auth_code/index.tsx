@@ -50,6 +50,9 @@ const AuthCode = () => {
     }
   };
   useEffect(() => {
+    if (Cookies.get("access_token")) {
+      router.push("/");
+    }
     if (router.query.code) {
       getAuthTokens();
     }
