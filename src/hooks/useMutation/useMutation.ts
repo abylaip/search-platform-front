@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import axios from "axios";
+import axios, { Method } from "axios";
 import Cookies from "js-cookie";
 
 interface FetchDataResponse<T> {
@@ -9,7 +9,8 @@ interface FetchDataResponse<T> {
 }
 
 export const useMutation = <T = unknown>(
-  url: string
+  url: string,
+  method: Method = "PUT"
 ): [FetchDataResponse<T>, (payload: any) => void] => {
   const [res, setRes] = useState<FetchDataResponse<T>>({
     data: null,
@@ -22,10 +23,14 @@ export const useMutation = <T = unknown>(
     (payload: any) => {
       setRes((prevState) => ({ ...prevState, isLoading: true }));
 
+      const config = {
+        headers: { Authorization: `Bearer ${access_token}` },
+      };
+
+      const requestMethod = method.toLowerCase() as Method;
+
       axios
-        .put<T>(url, payload, {
-          headers: { Authorization: `Bearer ${access_token}` },
-        })
+        .request<T>({ url, method: requestMethod, data: payload, ...config })
         .then((response) => {
           setRes({ data: response.data, isLoading: false, error: null });
         })
@@ -33,7 +38,7 @@ export const useMutation = <T = unknown>(
           setRes({ data: null, isLoading: false, error });
         });
     },
-    [url, access_token]
+    [url, method, access_token]
   );
 
   return [res, callAPI];

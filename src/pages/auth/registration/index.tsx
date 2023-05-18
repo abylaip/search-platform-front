@@ -2,6 +2,7 @@ import { useState, useLayoutEffect } from "react";
 import { useRouter } from "next/router";
 import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
+import Link from "next/link";
 
 const Registration = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const Registration = () => {
         setVerificationCode(true);
       }
     } catch (err: any) {
-      setVerificationResponse(err.response.data.message);
+      // setVerificationResponse(err.response.data.message);
       setVerificationCode(false);
     }
   };

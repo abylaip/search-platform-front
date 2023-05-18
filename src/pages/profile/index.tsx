@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { Switch } from "@ui";
+import { DissertationModal } from "@components/dissertation-modal";
+import { useState } from "react";
 
 const Profile = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
       <div className="px-32 py-5 flex flex-col space-y-5">
@@ -37,8 +40,10 @@ const Profile = () => {
         </section>
         <section className="rounded-lg bg-white shadow-lg p-7">
           <div className="pb-4 border-b border-gray-300 flex flex-row justify-between items-center">
-            <p className="text-primary font-semibold text-xl">Образование</p>
-            <button className="text-accent">
+            <p className="text-primary font-semibold text-xl">
+              Дипломные работы
+            </p>
+            <button onClick={() => setShowModal(true)} className="text-accent">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -64,6 +69,9 @@ const Profile = () => {
           />
         </section>
       </div>
+      {showModal && (
+        <DissertationModal showModal={showModal} setShowModal={setShowModal} />
+      )}
     </>
   );
 };
