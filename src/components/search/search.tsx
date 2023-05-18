@@ -119,13 +119,15 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
                 />
               ))
             ) : (
-              <ClipLoader
-                color={"#949292"}
-                loading={true}
-                size={30}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
+              <div className="mt-5">
+                <ClipLoader
+                  color={"#949292"}
+                  loading={true}
+                  size={30}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
             )}
           </div>
         </TransitionSearchBar>
