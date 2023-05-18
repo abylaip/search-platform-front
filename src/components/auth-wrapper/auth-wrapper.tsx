@@ -22,7 +22,6 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
     params.append("response_type", "code");
 
     try {
-      await router.push("/auth_code");
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/oauth2/token`,
         {
