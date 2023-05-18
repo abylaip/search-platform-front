@@ -57,7 +57,8 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
       !Cookies.get("refresh_token") &&
       router.pathname !== "/auth_code" &&
       router.pathname !== "/registration" &&
-      router.pathname !== "/auth/registration"
+      router.pathname !== "/auth/registration" &&
+      router.pathname !== "/login"
     ) {
       router.push("/");
     } else if (!Cookies.get("access_token") && Cookies.get("refresh_token")) {
