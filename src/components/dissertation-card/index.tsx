@@ -5,16 +5,21 @@ export const DissertationCard = ({
   category,
   organizationName,
   dissertAbstract,
+  setShowSearchInput,
 }: {
   name: string;
   category: string;
   organizationName: string;
   dissertAbstract: string;
+  setShowSearchInput: (val: boolean) => void;
 }) => {
   const router = useRouter();
   return (
     <div
-      onClick={() => router.push(`/dissertation/${1}`)}
+      onClick={() => {
+        router.push(`/dissertation/${1}`);
+        setShowSearchInput(false);
+      }}
       className="rounded-xl p-3 flex flex-col space-3 bg-white w-[800px] mt-5 cursor-pointer"
     >
       <p className="text-lg font-semibold">{name}</p>
