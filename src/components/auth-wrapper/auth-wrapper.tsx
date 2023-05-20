@@ -63,7 +63,7 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
       router.push("/");
     } else if (!Cookies.get("access_token") && Cookies.get("refresh_token")) {
       getAuthTokens();
-    } else {
+    } else if (Cookies.get("access_token") && Cookies.get("refresh_token")) {
       setIsAuth(true);
     }
   }, [router.pathname]);
