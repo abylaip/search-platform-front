@@ -8,6 +8,7 @@ import jwtDecode from "jwt-decode";
 export const AuthWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const [isAuth, setIsAuth] = useState(false);
+  const [fullname, setFullname] = useState("");
   const access_token = Cookies.get("access_token");
   const refresh_token = Cookies.get("refresh_token");
   const expires = new Date();
@@ -64,12 +65,15 @@ export const AuthWrapper = ({ children }: { children: ReactNode }) => {
     } else if (!Cookies.get("access_token") && Cookies.get("refresh_token")) {
       getAuthTokens();
     } else if (Cookies.get("access_token") && Cookies.get("refresh_token")) {
+      const token: any = Cookies.get("access_token");
+      const user_info: any = jwtDecode(token);
+      setFullname(user_info.fullName);
       setIsAuth(true);
     }
   }, [router.pathname]);
   return (
     <>
-      <Header isAuth={isAuth} />
+      <Header isAuth={isAuth} fullname={fullname} />
       {children}
     </>
   );

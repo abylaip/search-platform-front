@@ -4,29 +4,16 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Cookies from "js-cookie";
 
-export const Header = ({ isAuth }: { isAuth: boolean }) => {
+export const Header = ({
+  isAuth,
+  fullname,
+}: {
+  isAuth: boolean;
+  fullname: string;
+}) => {
   const router = useRouter();
   const [showDropDown, setShowDropDown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const menu = [
-    {
-      name: "Home",
-      to: "/",
-    },
-    {
-      name: "My contracts",
-      to: "/my-contracts",
-    },
-    {
-      name: "Jobs",
-      to: "/jobs",
-    },
-    {
-      name: "Notifications",
-      to: "/notifications",
-    },
-  ];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -73,7 +60,7 @@ export const Header = ({ isAuth }: { isAuth: boolean }) => {
                 onClick={() => setShowDropDown(true)}
                 className="flex flex-row items-center justify-center space-x-2 cursor-pointer"
               >
-                <p>Abylay Aiyp</p>
+                <p>{fullname}</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
