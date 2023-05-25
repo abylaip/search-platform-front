@@ -22,14 +22,14 @@ const DiplomasPage = () => {
 
   return (
     <>
-      <div className="px-32 py-5 flex flex-col space-y-5">
+      <div className="px-32 py-5 flex flex-col space-y-5 max-h-screen">
         <p className="text-gray-400 cursor-default">
           Главная страница /{" "}
           <span className="font-semibold text-accent">
             Поиск дипломных работ
           </span>
         </p>
-        <div className="p-5 flex bg-white rounded-lg shadow-lg h-screen">
+        <div className="p-5 flex bg-white rounded-lg shadow-lg h-full">
           <div className="flex-1 flex flex-col pr-2 border-r border-gray-300 overflow-y-scroll">
             {!!data &&
               data.content.map((item, key) => (
