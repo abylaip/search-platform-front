@@ -13,7 +13,7 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
   const debouncedValue = useDebounce<string>(searchValue, 500);
   const [showSearchButton, setShowSearchButton] = useState(false);
   const [filtered, setFiltered] = useState<IDiplomaContent[]>();
-  const { data, error } = useFetch<IDiploma>(
+  const { data } = useFetch<IDiploma>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation?query=${debouncedValue}`
   );
 
@@ -111,6 +111,7 @@ export const SearchWrapper = ({ children }: { children: ReactNode }) => {
               filtered.map((item, key) => (
                 <DissertationCard
                   key={key}
+                  id={item.id!}
                   name={item.name}
                   category={item.category}
                   organizationName={item.organizationName}

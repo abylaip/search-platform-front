@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 
 export const DissertationCard = ({
+  id,
   name,
   category,
   organizationName,
   dissertAbstract,
   setShowSearchInput,
 }: {
+  id: number;
   name: string;
   category: string;
   organizationName: string;
@@ -17,7 +19,7 @@ export const DissertationCard = ({
   return (
     <div
       onClick={() => {
-        router.push(`/dissertation/${1}`);
+        router.push(`/dissertation/${id}`);
         setShowSearchInput(false);
       }}
       className="rounded-xl p-3 flex flex-col space-3 bg-white w-[800px] mt-5 cursor-pointer"

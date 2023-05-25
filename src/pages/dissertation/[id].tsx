@@ -4,9 +4,10 @@ import { IDiplomaContent } from "@types";
 
 const DissertationPage = () => {
   const router = useRouter();
-  const { data, error } = useFetch<IDiplomaContent>(
+  const { data } = useFetch<IDiplomaContent>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation/${router.query.id}`
   );
+  console.log(data);
 
   return (
     <>
