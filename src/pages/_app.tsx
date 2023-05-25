@@ -15,12 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <TopProgressBar />
-      {/* <AuthWrapper>
-        
-      </AuthWrapper> */}
-      <SearchWrapper>
-        <Component {...pageProps} />
-      </SearchWrapper>
+      <AuthWrapper>
+        <SearchWrapper>
+          <Component {...pageProps} />
+        </SearchWrapper>
+      </AuthWrapper>
     </>
   );
 }
