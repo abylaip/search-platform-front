@@ -24,7 +24,7 @@ export const DissertationModal = ({
     name: "",
     category: "",
     dissertAbstract: "",
-    files: null,
+    files: [],
   });
   const [next, setNext] = useState(false);
   const [response, postDissertationCall] = useMutation<IDiploma>(
