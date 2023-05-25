@@ -199,7 +199,7 @@ const StepTwo = ({
         .post(`${process.env.NEXT_PUBLIC_API_URL}/fs`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: Cookies.get("access_token"),
+            Authorization: `Bearer ${Cookies.get("access_token")}`,
           },
         })
         .then((result) => {
@@ -225,6 +225,23 @@ const StepTwo = ({
               aria-label="Loading Spinner"
               data-testid="loader"
             />
+          ) : ready ? (
+            <div className="text-green-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+            </div>
           ) : (
             <label className="cursor-pointer text-slate-400 flex flex-col space-y-4 items-center">
               <svg
