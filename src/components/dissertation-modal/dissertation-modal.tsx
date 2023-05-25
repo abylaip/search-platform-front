@@ -33,7 +33,7 @@ export const DissertationModal = ({
   };
 
   useEffect(() => {
-    if (uploadedJson.length > 0) {
+    if (uploadedJson) {
       setDissertation({ ...dissertation, files: uploadedJson });
       axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/dissertation`, dissertation, {
