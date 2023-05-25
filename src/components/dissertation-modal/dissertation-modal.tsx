@@ -222,7 +222,7 @@ const StepTwo = ({
           },
         })
         .then((result) => {
-          setUploadedJson(result);
+          setUploadedJson(result.data);
           setLoading(false);
           setReady(true);
         })
