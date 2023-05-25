@@ -44,6 +44,8 @@ export const DissertationModal = ({
         .catch((error) => {
           alert("Не получилось загрузить фотографии");
         });
+    } else {
+      uploadDissertation();
     }
     !isLoading && setShowModal(false);
   };
