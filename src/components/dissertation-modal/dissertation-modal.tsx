@@ -29,10 +29,6 @@ export const DissertationModal = ({
   const [isLoading, setIsLoading] = useState(false);
   const [next, setNext] = useState(false);
   const uploadDissertation = () => {
-    !isLoading && setShowModal(false);
-  };
-
-  useEffect(() => {
     if (uploadedJson) {
       setDissertation({ ...dissertation, files: uploadedJson });
       axios
@@ -49,7 +45,8 @@ export const DissertationModal = ({
           alert("Не получилось загрузить фотографии");
         });
     }
-  }, [uploadedJson]);
+    !isLoading && setShowModal(false);
+  };
 
   return (
     <div
