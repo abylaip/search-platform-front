@@ -233,7 +233,7 @@ const StepTwo = ({
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-10 h-10"
               >
                 <path
                   strokeLinecap="round"
@@ -269,7 +269,7 @@ const StepTwo = ({
           )}
         </div>
         <button
-          disabled={ready}
+          disabled={!ready}
           onClick={uploadDissertation}
           className="w-full bg-accent text-white rounded-lg py-3 font-semibold"
         >
