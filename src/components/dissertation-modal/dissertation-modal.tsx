@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useMutation } from "@hooks";
 import ClipLoader from "react-spinners/ClipLoader";
 import { IDiploma } from "@types";
@@ -24,15 +18,15 @@ export const DissertationModal = ({
     name: "",
     category: "",
     dissertAbstract: "",
-    files: [],
+    files: uploadedJson,
   });
   const [response, postDissertation] = useMutation<IDiploma>(
-    `${process.env.NEXT_PUBLIC_API_URL}/dissertation`
+    `${process.env.NEXT_PUBLIC_API_URL}/dissertation`,
+    "POST"
   );
   const { isLoading } = response;
   const [next, setNext] = useState(false);
-  const uploadDissertation = async () => {
-    setDissertation({ ...dissertation, files: uploadedJson });
+  const uploadDissertation = () => {
     postDissertation(dissertation);
     !isLoading && setShowModal(false);
   };
