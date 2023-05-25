@@ -16,7 +16,7 @@ const DiplomasPage = () => {
     organizationName: "",
     dissertAbstract: "",
   });
-  const { data, error } = useFetch<IDiploma>(
+  const { data } = useFetch<IDiploma>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation`
   );
 
