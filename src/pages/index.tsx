@@ -29,7 +29,7 @@ const DiplomasPage = () => {
             Поиск дипломных работ
           </span>
         </p>
-        <div className="p-5 flex bg-white rounded-lg shadow-lg h-[1000px]">
+        <div className="p-5 flex bg-white rounded-lg shadow-lg h-[500px]">
           <div className="flex-1 flex flex-col pr-2 border-r border-gray-300 overflow-y-scroll">
             {!!data &&
               data.content.map((item, key) => (
