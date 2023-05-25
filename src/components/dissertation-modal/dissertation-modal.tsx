@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useMutation } from "@hooks";
 import ClipLoader from "react-spinners/ClipLoader";
 import { IDiploma } from "@types";
@@ -27,10 +33,15 @@ export const DissertationModal = ({
   );
   const { isLoading } = response;
   const uploadDissertation = () => {
-    setDissertation({ ...dissertation, files: uploadedJson });
-    postDissertationCall(dissertation);
     !isLoading && setShowModal(false);
   };
+
+  useEffect(() => {
+    if (uploadedJson !== null) {
+      setDissertation({ ...dissertation, files: uploadedJson });
+      postDissertationCall(dissertation);
+    }
+  }, [uploadedJson]);
 
   return (
     <div
