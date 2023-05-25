@@ -4,6 +4,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { IDiploma } from "@types";
 import FormData from "form-data";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const DissertationModal = ({
   showModal,
@@ -196,7 +197,10 @@ const StepTwo = ({
       }
       axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/fs`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: Cookies.get("access_token"),
+          },
         })
         .then((result) => {
           setUploadedJson(result);
