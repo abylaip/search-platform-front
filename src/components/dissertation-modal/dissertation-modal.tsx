@@ -26,27 +26,14 @@ export const DissertationModal = ({
     dissertAbstract: "",
     files: [],
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [response, postDissertation] = useMutation<IDiploma>(
+    `${process.env.NEXT_PUBLIC_API_URL}/dissertation`
+  );
+  const { isLoading } = response;
   const [next, setNext] = useState(false);
-  const uploadDissertation = () => {
-    if (uploadedJson) {
-      setDissertation({ ...dissertation, files: uploadedJson });
-      axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL}/dissertation`, dissertation, {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("access_token")}`,
-          },
-        })
-        .then((result) => {
-          setUploadedJson(result);
-          setIsLoading(true);
-        })
-        .catch((error) => {
-          alert("Не получилось загрузить фотографии");
-        });
-    } else {
-      uploadDissertation();
-    }
+  const uploadDissertation = async () => {
+    setDissertation({ ...dissertation, files: uploadedJson });
+    postDissertation(dissertation);
     !isLoading && setShowModal(false);
   };
 
