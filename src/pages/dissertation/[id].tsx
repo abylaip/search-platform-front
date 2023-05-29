@@ -48,7 +48,9 @@ const DissertationPage = () => {
             <div className="flex-1 pt-8">
               <ul>
                 <li className="flex flex-row justify-around">
-                  <p>Название</p>·<p>Тип файла</p>·<p>Скачать</p>
+                  <p>Название</p>
+                  <p>Тип файла</p>
+                  <p>Скачать</p>
                 </li>
                 {data?.files.map((item, key) => (
                   <li className="flex flex-row justify-around" key={key}>
