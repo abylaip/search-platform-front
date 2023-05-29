@@ -12,7 +12,7 @@ const DissertationPage = () => {
   const { data: userData } = useFetch<IUser>(
     `${process.env.NEXT_PUBLIC_API_URL}/users/${data?.createdBy}`
   );
-  console.log(userData);
+  console.log(data);
 
   return (
     <>
@@ -22,23 +22,26 @@ const DissertationPage = () => {
           <span className="font-semibold text-accent">Дипломная работа</span>
         </p>
         {userData?.firstName !== undefined ? (
-          <section className="flex flex-col space-y-2 rounded-lg bg-white shadow-lg py-5 px-7">
-            <p className="font-thin">{`${userData?.firstName} · ${userData?.surname} · ${userData?.email}`}</p>
-            <p className="text-2xl font-bold text-accent">{data?.name}</p>
-            <p className="text-lg">{data?.organizationName}</p>
-            <p className="text-lg">
-              Категория:{" "}
-              <span className="font-semibold text-primary">
-                {data?.category}
-              </span>
-            </p>
-            <div className="flex flex-col">
-              <p>
-                <span className="font-bold">Abstract. </span>
-                {data?.dissertAbstract}
+          <div className="flex flex-row space-x-5">
+            <div className="flex flex-col space-y-2 rounded-lg bg-white shadow-lg py-5 px-7">
+              <p className="font-thin">{`${userData?.firstName} · ${userData?.surname} · ${userData?.email}`}</p>
+              <p className="text-2xl font-bold text-accent">{data?.name}</p>
+              <p className="text-lg">{data?.organizationName}</p>
+              <p className="text-lg">
+                Категория:{" "}
+                <span className="font-semibold text-primary">
+                  {data?.category}
+                </span>
               </p>
+              <div className="flex flex-col">
+                <p>
+                  <span className="font-bold">Abstract. </span>
+                  {data?.dissertAbstract}
+                </p>
+              </div>
             </div>
-          </section>
+            <div>files</div>
+          </div>
         ) : (
           <div className="w-full justify-center pt-10">
             <ClipLoader
