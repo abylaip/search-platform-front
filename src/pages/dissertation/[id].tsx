@@ -23,7 +23,7 @@ const DissertationPage = () => {
         </p>
         {userData?.firstName !== undefined ? (
           <div className="flex flex-row space-x-5 rounded-lg bg-white shadow-lg py-5 px-7">
-            <div className="flex flex-col space-y-2">
+            <div className="flex-1 flex flex-col space-y-2">
               <p className="font-thin">{`${userData?.firstName} · ${userData?.surname} · ${userData?.email}`}</p>
               <p className="text-2xl font-bold text-accent">{data?.name}</p>
               <p className="text-lg">{data?.organizationName}</p>
@@ -40,7 +40,31 @@ const DissertationPage = () => {
                 </p>
               </div>
             </div>
-            <div>files</div>
+            <div className="flex-1 pt-10">
+              <ul>
+                {data?.files.map((item, key) => (
+                  <li className="flex flex-row" key={key}>
+                    {`${item.name} · ${item.mimeType} · `}
+                    <button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                        />
+                      </svg>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         ) : (
           <div className="w-full flex justify-center pt-10">
