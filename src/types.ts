@@ -26,6 +26,7 @@ export interface IDiploma {
 export interface IDiplomaContent {
   id?: number;
   createdAt: string;
+  createdBy: number;
   modifiedAt: string;
   name: string;
   category: string;

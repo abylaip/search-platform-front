@@ -7,7 +7,10 @@ const DissertationPage = () => {
   const { data } = useFetch<IDiplomaContent>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation/${router.query.id}`
   );
-  console.log(data);
+  const { data: userData } = useFetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${data?.createdBy}`
+  );
+  console.log(userData);
 
   return (
     <>
