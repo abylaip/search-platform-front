@@ -22,8 +22,8 @@ const DissertationPage = () => {
           <span className="font-semibold text-accent">Дипломная работа</span>
         </p>
         {userData?.firstName !== undefined ? (
-          <div className="flex flex-row space-x-5">
-            <div className="flex flex-col space-y-2 rounded-lg bg-white shadow-lg py-5 px-7">
+          <div className="flex flex-row space-x-5 rounded-lg bg-white shadow-lg py-5 px-7">
+            <div className="flex flex-col space-y-2">
               <p className="font-thin">{`${userData?.firstName} · ${userData?.surname} · ${userData?.email}`}</p>
               <p className="text-2xl font-bold text-accent">{data?.name}</p>
               <p className="text-lg">{data?.organizationName}</p>
@@ -43,7 +43,7 @@ const DissertationPage = () => {
             <div>files</div>
           </div>
         ) : (
-          <div className="w-full justify-center pt-10">
+          <div className="w-full flex justify-center pt-10">
             <ClipLoader
               color={"#7a7777"}
               loading={true}
