@@ -15,7 +15,7 @@ const DissertationPage = () => {
 
   return (
     <>
-      <div className="px-32 py-5 flex flex-col space-y-5">
+      <div className="px-32 py-5 flex flex-col space-y-5 w-full">
         <p className="text-gray-400 cursor-default">
           Главная страница / <span>Поиск дипломных работ</span> /{" "}
           <span className="font-semibold text-accent">Дипломная работа</span>
