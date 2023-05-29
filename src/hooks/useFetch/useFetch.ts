@@ -6,6 +6,11 @@ interface State<T> {
   error?: Error;
 }
 
+interface Conditions {
+  data?: number;
+  flag?: boolean;
+}
+
 type Cache<T> = { [url: string]: T };
 
 type Action<T> =
@@ -15,7 +20,8 @@ type Action<T> =
 
 export function useFetch<T = unknown>(
   url?: string,
-  options?: RequestInit
+  options?: RequestInit,
+  conditions?: Conditions
 ): State<T> {
   const cache = useRef<Cache<T>>({});
   const access_token = Cookies.get("access_token");
@@ -80,7 +86,16 @@ export function useFetch<T = unknown>(
       }
     };
 
-    void fetchData();
+    if (
+      conditions?.flag &&
+      (conditions.data !== undefined || conditions.data !== null)
+    ) {
+      void fetchData();
+    }
+
+    if (typeof conditions === "undefined") {
+      void fetchData();
+    }
 
     return () => {
       cancelRequest.current = true;

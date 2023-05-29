@@ -10,7 +10,12 @@ const DissertationPage = () => {
   );
 
   const { data: userData } = useFetch<IUser>(
-    `${process.env.NEXT_PUBLIC_API_URL}/users/${data?.createdBy}`
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${data?.createdBy}`,
+    undefined,
+    {
+      flag: true,
+      data: data?.id,
+    }
   );
   console.log(data);
 
@@ -40,11 +45,11 @@ const DissertationPage = () => {
                 </p>
               </div>
             </div>
-            <div className="flex-1 pt-10">
+            <div className="flex-1 pt-8">
               <ul>
                 {data?.files.map((item, key) => (
-                  <li className="flex flex-row" key={key}>
-                    {`${item.name} · ${item.mimeType} · `}
+                  <li className="flex flex-row justify-around" key={key}>
+                    <p>{item.name}</p>·<p>{item.mimeType}</p>·
                     <button>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
