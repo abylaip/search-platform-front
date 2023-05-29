@@ -1,8 +1,10 @@
 import { useState } from "react";
+import Link from "next/link";
 import { useFetch } from "@hooks";
 import { IDiploma } from "@types";
 
 interface Content {
+  id: number;
   name: string;
   category: string;
   organizationName: string;
@@ -11,6 +13,7 @@ interface Content {
 
 const DiplomasPage = () => {
   const [content, setContent] = useState<Content>({
+    id: 0,
     name: "",
     category: "",
     organizationName: "",
@@ -35,6 +38,7 @@ const DiplomasPage = () => {
               data.content.map((item, key) => (
                 <DiplomaCard
                   key={key}
+                  id={item.id!}
                   name={item.name}
                   category={item.category}
                   organizationName={item.organizationName}
@@ -49,7 +53,11 @@ const DiplomasPage = () => {
               content.dissertAbstract ? "visible" : "invisible"
             } flex flex-col space-y-2 h-full overflow-y-scroll overflow-x-hidden max-w-full`}
           >
-            <p className="text-xl font-bold">{content.name}</p>
+            <Link href={`/dissertation/${content.id}`}>
+              <p className="text-xl font-bold hover:underline">
+                {content.name}
+              </p>
+            </Link>
             <p className="text-low-contrast">{content.organizationName}</p>
             <label className="text-primary flex flex-row space-x-2">
               <svg
@@ -101,6 +109,7 @@ const DiplomasPage = () => {
 };
 
 const DiplomaCard = ({
+  id,
   name,
   category,
   organizationName,
@@ -108,6 +117,7 @@ const DiplomaCard = ({
   content,
   setContent,
 }: {
+  id: number;
   name: string;
   category: string;
   organizationName: string;
@@ -119,6 +129,7 @@ const DiplomaCard = ({
     <div
       onClick={() => {
         setContent({
+          id: id,
           name: name,
           category: category,
           organizationName: organizationName,
