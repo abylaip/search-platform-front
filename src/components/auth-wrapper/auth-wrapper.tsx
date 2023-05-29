@@ -1,9 +1,9 @@
 import { useEffect, ReactNode, useState } from "react";
 import { useRouter } from "next/router";
+import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import { IToken } from "@types";
 import { Header } from "..";
-import jwtDecode from "jwt-decode";
 
 export const AuthWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();

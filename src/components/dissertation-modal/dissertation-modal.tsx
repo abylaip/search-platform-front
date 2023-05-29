@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useMutation } from "@hooks";
 import ClipLoader from "react-spinners/ClipLoader";
 import { IDiploma } from "@types";
@@ -18,7 +18,7 @@ export const DissertationModal = ({
     name: "",
     category: "",
     dissertAbstract: "",
-    files: uploadedJson,
+    files: null,
   });
   const [response, postDissertation] = useMutation<IDiploma>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation`,
@@ -26,6 +26,17 @@ export const DissertationModal = ({
   );
   const { isLoading } = response;
   const [next, setNext] = useState(false);
+
+  useEffect(() => {
+    if (uploadedJson) {
+      uploadDissertation();
+    }
+  }, [dissertation]);
+
+  const setJsonToDissertation = () => {
+    setDissertation({ ...dissertation, files: uploadedJson });
+  };
+
   const uploadDissertation = () => {
     postDissertation(dissertation);
     !isLoading && setShowModal(false);
@@ -98,7 +109,7 @@ export const DissertationModal = ({
                 />
               ) : (
                 <StepTwo
-                  uploadDissertation={uploadDissertation}
+                  setJsonToDissertation={setJsonToDissertation}
                   setUploadedJson={setUploadedJson}
                 />
               )}
@@ -177,10 +188,10 @@ const StepOne = ({
 };
 
 const StepTwo = ({
-  uploadDissertation,
+  setJsonToDissertation,
   setUploadedJson,
 }: {
-  uploadDissertation: () => void;
+  setJsonToDissertation: () => void;
   setUploadedJson: Dispatch<any>;
 }) => {
   const [loading, setLoading] = useState(false);
@@ -269,7 +280,7 @@ const StepTwo = ({
         </div>
         <button
           disabled={!ready}
-          onClick={uploadDissertation}
+          onClick={setJsonToDissertation}
           className="w-full bg-accent text-white rounded-lg py-3 font-semibold"
         >
           Загрузить
