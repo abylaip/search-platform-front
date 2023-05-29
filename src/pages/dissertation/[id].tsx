@@ -45,8 +45,8 @@ const DissertationPage = () => {
                 </p>
               </div>
             </div>
-            <div className="flex-1 pt-8">
-              <table className="table-fixed">
+            <div className="flex-1 pt-8 w-full">
+              <table className="table-fixed w-full">
                 <tbody>
                   <tr>
                     <td>
