@@ -47,7 +47,7 @@ const DissertationPage = () => {
             </div>
             <div className="flex-1 pt-8">
               <ul>
-                <li className="flex flex-row justify-around">
+                <li className="flex flex-row justify-around mb-3">
                   <p>Название</p>
                   <p>Тип файла</p>
                   <p>Скачать</p>
