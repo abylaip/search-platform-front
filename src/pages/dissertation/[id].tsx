@@ -22,8 +22,8 @@ const DissertationPage = () => {
         <section className="flex flex-col space-y-2 rounded-lg bg-white shadow-lg py-5 px-7">
           <p className="text-2xl font-thin">{`${userData?.firstName} · ${userData?.surname} · ${userData?.email}`}</p>
           <p className="text-2xl font-bold text-accent">{data?.name}</p>
-          <p className="text-xl">{data?.organizationName}</p>
-          <p className="text-xl">
+          <p className="text-lg">{data?.organizationName}</p>
+          <p className="text-lg">
             Категория:{" "}
             <span className="font-semibold text-primary">{data?.category}</span>
           </p>
