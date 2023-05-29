@@ -62,13 +62,13 @@ const DissertationPage = () => {
                   {data?.files.map((item, key) => (
                     <tr key={key}>
                       <td>
-                        <p>{item.name}</p>
+                        <p className="text-center">{item.name}</p>
                       </td>
                       <td>
-                        <p>{item.mimeType}</p>
+                        <p className="text-center">{item.mimeType}</p>
                       </td>
                       <td>
-                        <button className="text-blue-500">
+                        <button className="text-blue-500 text-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
