@@ -67,8 +67,8 @@ const DissertationPage = () => {
                       <td>
                         <p className="text-center">{item.mimeType}</p>
                       </td>
-                      <td>
-                        <button className="text-blue-500 text-center">
+                      <td className="flex justify-center">
+                        <button className="text-blue-500">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
