@@ -20,7 +20,7 @@ const DissertationPage = () => {
           Главная страница / <span>Поиск дипломных работ</span> /{" "}
           <span className="font-semibold text-accent">Дипломная работа</span>
         </p>
-        {userData ? (
+        {userData?.firstName !== undefined ? (
           <section className="flex flex-col space-y-2 rounded-lg bg-white shadow-lg py-5 px-7">
             <p className="text-xl font-thin">{`${userData?.firstName} · ${userData?.surname} · ${userData?.email}`}</p>
             <p className="text-2xl font-bold text-accent">{data?.name}</p>
@@ -39,13 +39,15 @@ const DissertationPage = () => {
             </div>
           </section>
         ) : (
-          <ClipLoader
-            color={"#7a7777"}
-            loading={true}
-            size={35}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
+          <div className="w-full justify-center pt-10">
+            <ClipLoader
+              color={"#7a7777"}
+              loading={true}
+              size={35}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
         )}
       </div>
     </>
