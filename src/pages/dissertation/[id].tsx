@@ -8,6 +8,7 @@ const DissertationPage = () => {
   const { data } = useFetch<IDiplomaContent>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation/${router.query.id}`
   );
+
   const { data: userData } = useFetch<IUser>(
     `${process.env.NEXT_PUBLIC_API_URL}/users/${data?.createdBy}`
   );
@@ -22,7 +23,7 @@ const DissertationPage = () => {
         </p>
         {userData?.firstName !== undefined ? (
           <section className="flex flex-col space-y-2 rounded-lg bg-white shadow-lg py-5 px-7">
-            <p className="text-xl font-thin">{`${userData?.firstName} · ${userData?.surname} · ${userData?.email}`}</p>
+            <p className="font-thin">{`${userData?.firstName} · ${userData?.surname} · ${userData?.email}`}</p>
             <p className="text-2xl font-bold text-accent">{data?.name}</p>
             <p className="text-lg">{data?.organizationName}</p>
             <p className="text-lg">
