@@ -48,15 +48,15 @@ const DissertationPage = () => {
             <div className="flex-1 pt-8 w-full">
               <table className="table-fixed w-full">
                 <tbody>
-                  <tr>
+                  <tr className="mb-4">
                     <td>
-                      <p>Название</p>
+                      <p className="text-center">Название</p>
                     </td>
                     <td>
-                      <p>Тип файла</p>
+                      <p className="text-center">Тип файла</p>
                     </td>
                     <td>
-                      <p>Скачать</p>
+                      <p className="text-center">Скачать</p>
                     </td>
                   </tr>
                   {data?.files.map((item, key) => (
