@@ -27,14 +27,18 @@ const DissertationPage = () => {
       },
     })
       .then((response: Response) => {
-        const filename = response.headers
-          .get("Content-Disposition")
-          ?.split("filename=")[1];
+        const contentDisposition = response.headers.get("Content-Disposition");
+        const filename = contentDisposition
+          ? contentDisposition.split("filename=")[1]
+          : "file.pdf"; // Fallback to a default name if Content-Disposition is not available
+
+        const sanitizedFilename = sanitizeFilename(filename);
+
         return response.blob().then((blob: Blob) => {
           const url = window.URL.createObjectURL(new Blob([blob]));
           const link = document.createElement("a");
           link.href = url;
-          link.download = fn || "file.pdf"; // Specify the desired file name or fallback to a default name
+          link.download = sanitizedFilename;
           link.click();
         });
       })
@@ -135,6 +139,12 @@ const DissertationPage = () => {
       </div>
     </>
   );
+};
+
+const sanitizeFilename = (filename: string): string => {
+  // Remove any invalid characters or patterns from the filename
+  const sanitized = filename.replace(/[<>:"\/\\|?*]+/g, "");
+  return sanitized;
 };
 
 export default DissertationPage;
