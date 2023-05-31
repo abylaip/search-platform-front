@@ -3,13 +3,10 @@ import { useRouter } from "next/router";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useFetch } from "@hooks";
 import { IDiplomaContent, IUser } from "@types";
+import Cookies from "js-cookie";
 
 const DissertationPage = () => {
   const router = useRouter();
-  const [filename, setFilename] = useState({
-    name: "",
-    id: 0,
-  });
   const { data } = useFetch<IDiplomaContent>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation/${router.query.id}`
   );
@@ -23,14 +20,27 @@ const DissertationPage = () => {
     }
   );
 
-  const {} = useFetch<any>(
-    `${process.env.NEXT_PUBLIC_API_URL}/fs/download?filename=${filename.name}`,
-    undefined,
-    {
-      flag: true,
-      data: filename.id,
-    }
-  );
+  const downloadFile = (filename: string) => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/fs/download?filename=${filename}`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("access_token")}`,
+        },
+      }
+    )
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "file.pdf";
+        link.click();
+      })
+      .catch((error) => {
+        console.error("Error downloading file:", error);
+      });
+  };
 
   return (
     <>
@@ -85,9 +95,7 @@ const DissertationPage = () => {
                       </td>
                       <td className="flex justify-center">
                         <button
-                          onClick={() =>
-                            setFilename({ name: item.name, id: data.id! })
-                          }
+                          onClick={() => downloadFile(item.name)}
                           className="text-blue-500"
                         >
                           <svg
