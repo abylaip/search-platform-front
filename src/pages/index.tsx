@@ -20,7 +20,8 @@ const DiplomasPage = () => {
     dissertAbstract: "",
   });
   const { data } = useFetch<IDiploma>(
-    `${process.env.NEXT_PUBLIC_API_URL}/dissertation/main`
+    `${process.env.NEXT_PUBLIC_API_URL}/dissertation/main`,
+    {}
   );
 
   return (
