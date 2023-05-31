@@ -60,7 +60,10 @@ const DissertationPage = () => {
                     </td>
                   </tr>
                   {data?.files.map((item, key) => (
-                    <tr key={key}>
+                    <tr
+                      key={key}
+                      className="pb-2 border-b border-gray-300 mb-3"
+                    >
                       <td>
                         <p className="text-center">{item.name}</p>
                       </td>
