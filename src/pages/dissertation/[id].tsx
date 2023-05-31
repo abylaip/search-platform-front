@@ -29,15 +29,19 @@ const DissertationPage = () => {
         },
       }
     )
-      .then((response) => response.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = filename;
-        link.click();
+      .then((response: Response) => {
+        const filename = response.headers
+          .get("Content-Disposition")
+          ?.split("filename=")[1];
+        return response.blob().then((blob: Blob) => {
+          const url = window.URL.createObjectURL(new Blob([blob]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = filename || "file.pdf"; // Specify the desired file name or fallback to a default name
+          link.click();
+        });
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error("Error downloading file:", error);
       });
   };
