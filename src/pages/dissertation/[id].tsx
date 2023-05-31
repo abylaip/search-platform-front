@@ -24,11 +24,11 @@ const DissertationPage = () => {
   );
 
   const {} = useFetch<any>(
-    `${process.env.NEXT_PUBLIC_API_URL}/fs/download?filename=${filename}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/fs/download?filename=${filename.name}`,
     undefined,
     {
       flag: true,
-      data: 1,
+      data: filename.id,
     }
   );
 
