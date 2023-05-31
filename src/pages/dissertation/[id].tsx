@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useFetch, useMutation } from "@hooks";
+import { useFetch } from "@hooks";
 import { IDiplomaContent, IUser } from "@types";
 
 const DissertationPage = () => {
@@ -86,7 +86,7 @@ const DissertationPage = () => {
                       <td className="flex justify-center">
                         <button
                           onClick={() =>
-                            setFilename({ name: data.name, id: data.id! })
+                            setFilename({ name: item.name, id: data.id! })
                           }
                           className="text-blue-500"
                         >
