@@ -20,15 +20,12 @@ const DissertationPage = () => {
     }
   );
 
-  const downloadFile = (filename: string) => {
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/fs/download?filename=${filename}`,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("access_token")}`,
-        },
-      }
-    )
+  const downloadFile = (fn: string) => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/fs/download?filename=${fn}`, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("access_token")}`,
+      },
+    })
       .then((response: Response) => {
         const filename = response.headers
           .get("Content-Disposition")
