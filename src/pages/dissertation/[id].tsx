@@ -47,7 +47,7 @@ const DissertationPage = () => {
             </div>
             <div className="flex-1 pt-8 w-full">
               <table className="table-fixed w-full">
-                <tbody>
+                <tbody className="flex flex-col space-y-5">
                   <tr className="mb-4">
                     <td>
                       <p className="text-center">Название</p>
@@ -60,10 +60,7 @@ const DissertationPage = () => {
                     </td>
                   </tr>
                   {data?.files.map((item, key) => (
-                    <tr
-                      key={key}
-                      className="pb-3 border-b border-gray-100 pt-5"
-                    >
+                    <tr key={key} className="pb-3 border-b border-gray-100">
                       <td>
                         <p className="text-center">{item.name}</p>
                       </td>
