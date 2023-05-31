@@ -34,7 +34,7 @@ const DissertationPage = () => {
           const url = window.URL.createObjectURL(new Blob([blob]));
           const link = document.createElement("a");
           link.href = url;
-          link.download = filename || "file.pdf"; // Specify the desired file name or fallback to a default name
+          link.download = fn || "file.pdf"; // Specify the desired file name or fallback to a default name
           link.click();
         });
       })
