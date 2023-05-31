@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useFetch } from "@hooks";
+import { useFetch, useMutation } from "@hooks";
 import { IDiplomaContent, IUser } from "@types";
 
 const DissertationPage = () => {
   const router = useRouter();
+  const [filename, setFilename] = useState({
+    name: "",
+    id: 0,
+  });
   const { data } = useFetch<IDiplomaContent>(
     `${process.env.NEXT_PUBLIC_API_URL}/dissertation/${router.query.id}`
   );
@@ -17,7 +22,15 @@ const DissertationPage = () => {
       data: data?.id,
     }
   );
-  console.log(data);
+
+  const {} = useFetch<any>(
+    `${process.env.NEXT_PUBLIC_API_URL}/fs/download?filename=${filename}`,
+    undefined,
+    {
+      flag: true,
+      data: 1,
+    }
+  );
 
   return (
     <>
@@ -71,7 +84,12 @@ const DissertationPage = () => {
                         <p className="text-center">{item.mimeType}</p>
                       </td>
                       <td className="flex justify-center">
-                        <button className="text-blue-500">
+                        <button
+                          onClick={() =>
+                            setFilename({ name: data.name, id: data.id! })
+                          }
+                          className="text-blue-500"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
