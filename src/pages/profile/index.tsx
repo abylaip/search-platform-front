@@ -82,8 +82,8 @@ const Profile = () => {
                 name={item.name}
                 field={item.category}
                 location={item.organizationName}
-                from={format(new Date(item.createdAt), "YYYY")}
-                to={format(new Date(item.modifiedAt), "YYYY")}
+                from={format(new Date(item.createdAt), "yyyy")}
+                to={format(new Date(item.modifiedAt), "yyyy")}
               />
             ))}
         </section>
