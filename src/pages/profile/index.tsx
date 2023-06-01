@@ -2,9 +2,22 @@ import Image from "next/image";
 import { Switch } from "@ui";
 import { DissertationModal } from "@components/dissertation-modal";
 import { useState } from "react";
+import { useFetch } from "@hooks";
+import { IDiploma, IUser } from "@types";
+import format from "date-fns/format";
 
 const Profile = () => {
   const [showModal, setShowModal] = useState(false);
+  let user_id =
+    typeof window !== "undefined" ? localStorage.getItem("user_id") : null;
+  const { data: user_data, error: user_error } = useFetch<IUser>(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${user_id}`
+  );
+
+  const { data } = useFetch<IDiploma>(
+    `${process.env.NEXT_PUBLIC_API_URL}/dissertation?userOnly=true`
+  );
+
   return (
     <>
       <div className="px-32 py-5 flex flex-col space-y-5">
@@ -25,9 +38,11 @@ const Profile = () => {
               />
               <div>
                 <p className="font-semibold text-high-contrast text-xl">
-                  Abylay Aiyp
+                  {`${user_data?.firstName} ${user_data?.surname}`}
                 </p>
-                <p className="text-gray-500">Software Engineering</p>
+                <p className="text-gray-500">
+                  {user_data?.profile.organization?.nameRu}
+                </p>
               </div>
             </div>
           </div>
@@ -60,13 +75,17 @@ const Profile = () => {
               </svg>
             </button>
           </div>
-          <InfoCard
-            name="AITU"
-            field="Bachelors degree"
-            location="Nur-sultan, Kazakhstan"
-            from="2020"
-            to="2023"
-          />
+          {!!data &&
+            data.content.map((item, key) => (
+              <InfoCard
+                key={key}
+                name={item.name}
+                field={item.category}
+                location={item.organizationName}
+                from={format(new Date(item.createdAt), "YYYY")}
+                to={format(new Date(item.modifiedAt), "YYYY")}
+              />
+            ))}
         </section>
       </div>
       {showModal && (
