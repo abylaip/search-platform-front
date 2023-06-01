@@ -16,7 +16,7 @@ const Profile = () => {
   );
 
   const { data } = useFetch<IDiploma>(
-    `${process.env.NEXT_PUBLIC_API_URL}/dissertation?userOnly=true`
+    `${process.env.NEXT_PUBLIC_API_URL}/dissertation/main?userOnly=true`
   );
 
   return (
@@ -32,13 +32,6 @@ const Profile = () => {
               <div className="py-6 rounded-t-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
               <div className="border-b border-gray-300 flex flex-row items-center py-5 px-7">
                 <div className="flex-1 flex flex-row items-center space-x-5">
-                  <Image
-                    src="/static/placeholder.png"
-                    width={100}
-                    height={100}
-                    className="rounded-full w-24 h-24 object-cover"
-                    alt=""
-                  />
                   <div>
                     <p className="font-semibold text-high-contrast text-xl">
                       {`${user_data?.firstName} ${user_data?.surname}`}
